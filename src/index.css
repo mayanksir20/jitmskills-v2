@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --- Primary Brand Colors --- */
+  --primary-red: #d32f2f; /* Main Action Color */
+  --primary-hover: #b71c1c;
+  --accent-red: #ff5252; /* For gradients & highlights */
+
+  /* --- Neutral Palette --- */
+  --deep-black: #0f172a; /* Sophisticated Dark (Blue-ish Black) */
+  --slate-dark: #1e293b; /* For sub-headings */
+  --slate-medium: #475569; /* For paragraphs */
+  --slate-light: #94a3b8; /* For muted text */
+
+  /* --- Backgrounds --- */
+  --bg-soft: #f8fafc; /* Main Page BG */
+  --bg-white: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+
+  /* --- Accents & Borders --- */
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: var(--bg-soft);
+  color: var(--deep-black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Golden Ratio Typography --- */
+
+h1,
+.h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+}
+
+h2,
+.h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+h3,
+.h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h4,
+.h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h5,
+.h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h6,
+.h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-red);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+p,
+.p-main {
+  font-size: 1.125rem;
+  color: var(--slate-medium);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+span.badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--primary-red);
+  background: rgba(211, 47, 47, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  display: inline-block;
+}
+
+/* --- Action Elements --- */
+
+.btn-jitm {
+  padding: 1.2rem 2.5rem;
+  border-radius: 1.25rem;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--primary-red);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-jitm:hover {
+  background: var(--deep-black);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.3);
+}
+
+.card-premium {
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: 2.5rem;
+  padding: 2.5rem;
+  transition: all 0.4s ease;
+}
+
+.card-premium:hover {
+  border-color: var(--primary-red);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Inactive Dots */
+.swiper-pagination-bullet {
+  background: #94a3b8 !important; /* Slate-400 (Grey) */
+  opacity: 0.5 !important;
+  width: 12px !important;
+  height: 6px !important;
+  border-radius: 4px !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* Active Dot */
+.swiper-pagination-bullet-active {
+  background: #d32f2f !important; /* JITM Red (Active) */
+  opacity: 1 !important;
+  width: 30px !important; /* Becomes a pill shape when active */
+  height: 6px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .skillservices .items-end {
+    align-items: unset !important;
+  }
+}
+
+/* about us page css */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.text-red-gradient {
+  background: linear-gradient(to right, #d32f2f, #ff5252);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.badge {
+  padding: 6px 16px;
+  border-radius: 99px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+/* Add to your index.css or App.css */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+}
+
+@keyframes notificationBlink {
+  0% {
+    background-color: #22c55e; /* Green */
+    transform: scale(1);
+  }
+
+  50% {
+    background-color: #ef4444; /* Red */
+    transform: scale(1.15);
+  }
+
+  100% {
+    background-color: #22c55e; /* Green */
+    transform: scale(1);
+  }
+}
+
+.notification-badge {
+  animation: notificationBlink 1s infinite ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

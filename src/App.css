@@ -1,0 +1,57 @@
+/* index.css */
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-infinite-scroll-up {
+  animation: scroll-up 25s linear infinite;
+}
+
+.animate-infinite-scroll-down {
+  animation: scroll-down 30s linear infinite;
+}
+
+/* Scrollbar indicators ko permanently block karne ke liye */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #admission-form,
+  #admission-form * {
+    visibility: visible;
+  }
+
+  #admission-form {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
