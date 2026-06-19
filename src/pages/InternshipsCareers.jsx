@@ -93,7 +93,7 @@ export default function InternshipHero() {
       }
 
       const response = await fetch(
-        "http://localhost:5000/api/v1/internship-apply",
+        "http://https://jitmskills-v2.onrender.com/api/v1/internship-apply",
         {
           method: "POST",
           body: dataPayload, // No explicit Content-Type header to let browser set boundary parameters automatically

@@ -135,7 +135,7 @@ function BecomeFranchisePartner() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/v1/send-lead", {
+      const response = await fetch("http://https://jitmskills-v2.onrender.com/api/v1/send-lead", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -17,7 +17,7 @@ const NotificationPanel = ({ onClose }) => {
   const loadNotifications = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/notifications"
+        "http://https://jitmskills-v2.onrender.com/api/notifications"
       );
 
       setItems(data || []);
@@ -36,7 +36,7 @@ const NotificationPanel = ({ onClose }) => {
   const clearAll = async () => {
     try {
       await axios.delete(
-        "http://localhost:5000/api/notifications"
+        "http://https://jitmskills-v2.onrender.com/api/notifications"
       );
 
       setItems([]);

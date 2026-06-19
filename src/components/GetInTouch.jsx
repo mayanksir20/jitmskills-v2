@@ -36,7 +36,7 @@ const GetInTouch = ({ isOpen, onClose }) => {
     try {
       // 📍 Alag dedicated endpoint par hit kiya jisse koi field mix na ho
       const response = await fetch(
-        "http://localhost:5000/api/v1/contact-inquiry",
+        "http://https://jitmskills-v2.onrender.com/api/v1/contact-inquiry",
         {
           method: "POST",
           headers: {

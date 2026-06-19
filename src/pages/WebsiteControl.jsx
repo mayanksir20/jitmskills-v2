@@ -9,7 +9,7 @@ const WebsiteControl = () => {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:5000/api/website-status",
+        "http://https://jitmskills-v2.onrender.com/api/website-status",
         {
           maintenanceMode: status,
         }

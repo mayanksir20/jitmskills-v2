@@ -72,7 +72,7 @@ function App() {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/website-status");
+        const res = await axios.get("http://https://jitmskills-v2.onrender.com/api/website-status");
 
         setMaintenance(res.data.maintenanceMode);
       } catch (err) {

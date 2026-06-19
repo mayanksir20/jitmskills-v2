@@ -3,9 +3,9 @@ import axios from 'axios';
 /**
  * API Central Hub:
  * Vite projects mein environment variables 'VITE_' se shuru hote hain.
- * Agar .env load nahi hoti, toh ye default localhost:5000 use karega.
+ * Agar .env load nahi hoti, toh ye default https://jitmskills-v2.onrender.com use karega.
  */
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://https://jitmskills-v2.onrender.com/api";
 
 const api = axios.create({
     baseURL: API_BASE_URL,

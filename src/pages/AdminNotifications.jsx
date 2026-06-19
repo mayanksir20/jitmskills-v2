@@ -17,7 +17,7 @@ const AdminNotifications = () => {
     const loadNotifications = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/notifications"
+          "http://https://jitmskills-v2.onrender.com/api/notifications"
         );
 
         setNotifications(data);
@@ -33,7 +33,7 @@ const AdminNotifications = () => {
   const fetchNotifications = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/notifications"
+        "http://https://jitmskills-v2.onrender.com/api/notifications"
       );
 
       setNotifications(data);
@@ -48,7 +48,7 @@ const AdminNotifications = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/api/notifications",
+        "http://https://jitmskills-v2.onrender.com/api/notifications",
         formData
       );
 
@@ -75,7 +75,7 @@ const AdminNotifications = () => {
   const deleteNotification = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/notifications/${id}`
+        `http://https://jitmskills-v2.onrender.com/api/notifications/${id}`
       );
 
       fetchNotifications();
@@ -88,7 +88,7 @@ const AdminNotifications = () => {
   const clearAll = async () => {
     try {
       await axios.delete(
-        "http://localhost:5000/api/notifications"
+        "http://https://jitmskills-v2.onrender.com/api/notifications"
       );
 
       fetchNotifications();

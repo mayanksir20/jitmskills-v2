@@ -84,7 +84,7 @@ const EnrollmentForm = ({
 
     try {
       // 📍 Dedicated Enrollment Endpoint Hit Matrix
-      const response = await fetch("http://localhost:5000/api/v1/student-enrollment", {
+      const response = await fetch("http://https://jitmskills-v2.onrender.com/api/v1/student-enrollment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payloadData),
