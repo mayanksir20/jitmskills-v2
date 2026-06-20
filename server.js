@@ -1,36 +1,3 @@
-// const express = require('express');
-// const dotenv = require('dotenv');
-// const cors = require('cors');
-// const connectDB = require('./config/db');
-// const authRoutes = require('./routes/authRoutes');
-// const testimonialRoutes = require('./routes/testimonialRoutes'); 
-
-// dotenv.config();
-// connectDB();
-
-// const app = express();
-
-// // CORS fix for your specific frontend URL
-// app.use(cors({
-//     origin: ["http://localhost:5173", "http://127.0.0.1:5173"], 
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true
-// }));
-
-// app.use(express.json({ limit: '10mb' })); 
-// app.use(express.urlencoded({ limit: '10mb', extended: true }));
-
-// app.use('/api/auth', authRoutes);
-// app.use('/api/testimonials', testimonialRoutes);
-
-// app.get('/api/test', (req, res) => {
-//     res.status(200).json({ status: "Live", message: "Backend is running" });
-// });
-
-// const PORT = process.env.PORT || 5001; // Port 5001 fallback
-// app.listen(PORT, () => {
-//     console.log(`🚀 Server started on port ${PORT}`);
-// });
 
 const express = require('express');
 const dotenv = require('dotenv');
@@ -67,9 +34,12 @@ const app = express();
 
 // CORS fix for your specific frontend URL
 app.use(cors({
-    origin: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+  origin: [
+    "https://www.jitmskills.com",
+    "https://jitmskills.com",
+    "http://localhost:5173"
+  ],
+  credentials: true
 }));
 
 app.use(express.json({ limit: '10mb' }));
