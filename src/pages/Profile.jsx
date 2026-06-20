@@ -40,7 +40,7 @@ const Profile = () => {
 
     try {
       const { data } = await axios.put(
-        "http://https://jitmskills-v2.onrender.com/api/auth/profile",
+        "https://jitmskills-v2.onrender.com/api/auth/profile",
         formData,
       );
 

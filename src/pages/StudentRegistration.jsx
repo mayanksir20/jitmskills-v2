@@ -117,7 +117,7 @@ export default function StudentRegistrationForm() {
       }
 
       const response = await fetch(
-        "http://https://jitmskills-v2.onrender.com/api/students/register",
+        "https://jitmskills-v2.onrender.com/api/students/register",
         {
           method: "POST",
           body: formPayload,
@@ -216,7 +216,7 @@ export default function StudentRegistrationForm() {
   const exportStudentsExcel = async () => {
     try {
       const response = await fetch(
-        "http://https://jitmskills-v2.onrender.com/api/students/export",
+        "https://jitmskills-v2.onrender.com/api/students/export",
         {
           method: "POST",
           headers: {

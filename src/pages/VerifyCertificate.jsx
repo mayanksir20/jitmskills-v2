@@ -28,7 +28,7 @@ export default function CertificateHeroSection() {
 
     try {
       const response = await fetch(
-        `http://https://jitmskills-v2.onrender.com/api/students/verify/${rollNumber}`,
+        `https://jitmskills-v2.onrender.com/api/students/verify/${rollNumber}`,
       );
 
       const data = await response.json();

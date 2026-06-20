@@ -143,7 +143,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchNotificationCount = async () => {
       try {
-        const res = await axios.get("http://https://jitmskills-v2.onrender.com/api/notifications");
+        const res = await axios.get("https://jitmskills-v2.onrender.com/api/notifications");
 
         setNotificationCount(res.data?.length || 0);
       } catch (error) {

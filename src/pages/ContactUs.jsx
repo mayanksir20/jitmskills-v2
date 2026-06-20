@@ -44,7 +44,7 @@ export default function ContactUs() {
 
     try {
       // 📍 Node.js Dedicated Corporate Endpoint Matrix
-      const response = await fetch("http://https://jitmskills-v2.onrender.com/api/v1/corporate-contact", {
+      const response = await fetch("https://jitmskills-v2.onrender.com/api/v1/corporate-contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
