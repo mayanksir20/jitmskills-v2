@@ -104,7 +104,7 @@ const WorkGallery = ({ lang = "en" }) => {
 
   return (
     <>
-      <section className="w-full bg-[#0B0F19] pt-52 pb-16 px-4 sm:px-6 lg:px-8 border-b border-white/5 relative overflow-hidden">
+      <section className="w-full bg-[#0B0F19] pt-28 lg:pt-52 pb-16 px-4 sm:px-6 lg:px-8 border-b border-white/5 relative overflow-hidden">
         {/* Pure Gallery Geometric Grid Lines Backdrop */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none" />
 

@@ -107,7 +107,7 @@ const NewsEventsHero = () => {
   };
   return (
     <>
-      <section className="w-full bg-[#0F172A] pt-52 pb-12 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-b border-white/10 relative">
+      <section className="w-full bg-[#0F172A] pt-28 lg:pt-52 pb-12 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden border-b border-white/10 relative">
         {/* Editorial Background Elements: Subtle Newspaper Grid Lines */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
 
@@ -302,7 +302,7 @@ const NewsEventsHero = () => {
             {/* ════════ LEFT COLUMN: MAIN BULLETIN CARDS AREA (8/12) ════════ */}
             <div className="lg:col-span-8 space-y-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <AnimatePresence >
+                <AnimatePresence>
                   {currentDisplayedNews.map((news) => {
                     const CategoryIcon = news.icon;
                     return (
@@ -713,7 +713,7 @@ const NewsEventsHero = () => {
                 layout
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
               >
-                <AnimatePresence >
+                <AnimatePresence>
                   {currentItems.length > 0 ? (
                     currentItems.map((release) => (
                       <motion.div

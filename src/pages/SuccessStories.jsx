@@ -161,7 +161,7 @@ const SuccessStoriesHero = () => {
 
   return (
     <>
-      <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-[#0A0F1D]">
+      <section className="relative min-h-screen flex items-center pt-12 lg:pt-32 pb-20 overflow-hidden bg-[#0A0F1D]">
         {/* Immersive Parallax Video Backdrop */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none w-full h-full">
           {/* Clean wrapper without undefined motion variables to prevent ESLint errors */}

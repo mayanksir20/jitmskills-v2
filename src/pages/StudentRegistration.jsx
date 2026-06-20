@@ -333,7 +333,7 @@ export default function StudentRegistrationForm() {
 
   return (
     <>
-      <section className="w-full mt-12 pt-36 pb-20 border-b border-white/[0.04] relative z-10 bg-[#070A13] text-white overflow-hidden">
+      <section className="w-full mt-6 lg:mt-12 pt-24 lg:pt-36 pb-20 border-b border-white/[0.04] relative z-10 bg-[#070A13] text-white overflow-hidden">
         {/* Decorative Grid Light Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[250px] bg-[#D32F2F]/10 rounded-full blur-[120px] pointer-events-none" />

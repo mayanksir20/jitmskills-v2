@@ -125,7 +125,7 @@ const TrainingSectors = () => {
   const [activeIndex, setActiveIndex] = useState(null);
   return (
     <>
-      <section className="relative min-h-screen flex items-center pt-24 pb-20 overflow-hidden bg-[#0F172A]">
+      <section className="relative min-h-screen flex items-center pt-12 lg:pt-32 pb-20 overflow-hidden bg-[#0F172A]">
         {/* Parallax Background (Slightly different video/image for training) */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A] via-[#0F172A]/90 to-transparent z-10" />
@@ -143,7 +143,7 @@ const TrainingSectors = () => {
           </video>
         </div>
 
-        <div className="max-w-7xl mt-16 mx-auto px-6 w-full relative z-20">
+        <div className="max-w-7xl mx-auto px-6 mt-12 min-[1024px]:mt-12 w-full relative z-20">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* LEFT CONTENT */}
             <motion.div

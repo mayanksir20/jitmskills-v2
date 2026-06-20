@@ -72,7 +72,7 @@ export default function DownloadsBrochures() {
         {/* ========================================================================= */}
         {/* ======================= HERO: LEFT TEXT & RIGHT BREADCRUMB ============== */}
         {/* ========================================================================= */}
-        <section className="w-full bg-[#0B0F19] pt-52 pb-24 px-4 sm:px-6 lg:px-8 border-b border-white/5 relative overflow-hidden">
+        <section className="w-full bg-[#0B0F19] pt-28 lg:pt-52 pb-24 px-4 sm:px-6 lg:px-8 border-b border-white/5 relative overflow-hidden">
           {/* Backdrop Matrix Effects */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none" />
           <div className="absolute -top-40 left-1/3 w-[600px] h-[600px] bg-[#D32F2F]/5 rounded-full blur-[140px] pointer-events-none" />

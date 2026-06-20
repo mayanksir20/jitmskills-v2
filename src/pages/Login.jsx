@@ -35,7 +35,7 @@ const Login = () => {
     const endpoint = isLogin ? "/api/auth/login" : "/api/auth/register";
     try {
       const { data } = await axios.post(
-        `http://127.0.0.1:5000${endpoint}`,
+        `https://jitmskills-v2.onrender.com${endpoint}`,
         formData,
       );
       localStorage.setItem("user", JSON.stringify(data));
@@ -127,7 +127,7 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            <AnimatePresence >
+            <AnimatePresence>
               {!isLogin && (
                 <motion.div variants={itemVars} className="relative">
                   <label className="text-[10px] font-black text-slate-400  tracking-widest ml-1 mb-2 block">

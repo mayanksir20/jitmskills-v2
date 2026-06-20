@@ -135,7 +135,7 @@ const Home = () => {
           {SLIDE_DATA.map((slide) => (
             <SwiperSlide key={slide.id}>
               {({ isActive }) => (
-                <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center py-16">
+                <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center pb-16 pt-0 lg:pt-16">
                   <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -870,7 +870,7 @@ const Home = () => {
             {/* --- Right Side: Fading Logo Grid --- */}
             <div className="relative h-[550px] flex items-center justify-center">
               <div className="grid grid-cols-3 gap-6 w-full relative z-10">
-                <AnimatePresence >
+                <AnimatePresence>
                   {visibleLogos.map((logo) => (
                     <motion.div
                       key={logo.id}

@@ -69,7 +69,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-[#D32F2F] selection:text-white overflow-x-hidden">
       {/* About JITM Skills : HERO WITH INTERACTIVE DATA CARDS */}
-      <section className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden bg-[#0F172A] isolate">
+      <section className="relative min-h-screen flex items-center pt-12 lg:pt-28 pb-20 overflow-hidden bg-[#0F172A] isolate">
         {/* Background Video Parallax - Fixed for Intermediate Screen Scaling */}
         {/* ================= BACKGROUND VIDEO LAYER (NO SCROLL-GAP DEFINITIVE FIX) ================= */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none w-full h-full">

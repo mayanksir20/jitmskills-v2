@@ -190,11 +190,11 @@ export default function JobOpeningsHeader() {
 
   return (
     <>
-      <section className="w-full bg-[#0B0F19] pt-36 pb-8 border-b border-white/5 font-sans antialiased text-white relative overflow-hidden">
+      <section className="w-full bg-[#0B0F19] pt-24 lg:pt-52 pb-24 px-4 sm:px-6 lg:px-8 border-b border-white/5 relative overflow-hidden">
         {/* Background Micro Glow Dot */}
         <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#D32F2F]/5 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="max-w-7xl mt-14 mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-5">
+        <div className="max-w-7xl mt-8 mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-5">
           <nav className="inline-flex items-center gap-2 px-4 py-2 border border-slate-700 rounded-full bg-slate-900/40 backdrop-blur-sm text-slate-400 text-[11px] font-semibold uppercase tracking-wider">
             <Link
               to="/"
@@ -270,7 +270,7 @@ export default function JobOpeningsHeader() {
         className="w-full bg-slate-50 min-h-screen text-slate-800 font-sans antialiased pb-24 relative selection:bg-red-200"
       >
         {/* HERO SECTION */}
-        <div className="bg-white border-b border-slate-200 pt-28 pb-12 px-4 sm:px-6 lg:px-8 shadow-xs">
+        <div className="bg-white border-b border-slate-200 pt-12 lg:pt-28 pb-12 px-4 sm:px-6 lg:px-8 shadow-xs">
           <div className="max-w-7xl mx-auto space-y-8">
             <div className="max-w-3xl space-y-3">
               <motion.div

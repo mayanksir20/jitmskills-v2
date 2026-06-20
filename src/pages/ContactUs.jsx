@@ -94,7 +94,7 @@ export default function ContactUs() {
   return (
     <div className="bg-[#F8FAFC] min-h-screen text-[#0F172A] font-sans antialiased overflow-x-hidden">
       {/* 🚀 1. HERO BREADCRUMB HEADER (PREMIUM DARK COMPLEX) */}
-      <div className="relative bg-[#0F172A] pt-48 pb-20 px-6 overflow-hidden border-b border-white/5">
+      <div className="relative bg-[#0F172A] pt-28 lg:pt-48 pb-20 px-6 overflow-hidden border-b border-white/5">
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 blur-[100px] pointer-events-none" />
         <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-blue-600/5 blur-[100px] pointer-events-none" />
 

@@ -34,7 +34,7 @@ const CorporateConnectFirstSection = () => {
   const navigate = useNavigate();
   return (
     <>
-      <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-[#0F172A]">
+      <section className="relative min-h-screen flex items-center pt-12 lg:pt-32 pb-20 overflow-hidden bg-[#0F172A]">
         {/* Background Video Parallax Layer */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none w-full h-full">
           <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-[#0F172A]">
@@ -65,7 +65,7 @@ const CorporateConnectFirstSection = () => {
               className="flex flex-col items-start"
             >
               {/* 🛠️ Modern Dynamic Breadcrumb Area */}
-              <motion.nav variants={fadeInUp} className="mb-6 mt-16 md:mt-0">
+              <motion.nav variants={fadeInUp} className="mb-6 md:mt-0">
                 <div className="flex items-center gap-3 bg-white/5 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
                   <Link
                     to="/"
