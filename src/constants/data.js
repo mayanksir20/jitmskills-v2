@@ -737,11 +737,11 @@ export const SKILL_INITIATIVES = {
 
 // image imports for schemes section
 
-import ddugkyImage from "../assets/images/Verticals/DDU-GKY – Deen Dayal Upadhyaya Grameen Kaushalya Yojana.webp";
-import pmkvyImage from "../assets/images/Verticals/PMKVY – Pradhan Mantri Kaushal Vikas Yojana.webp";
+import ddugkyImage from "../assets/images/Verticals/DDU-GKY.webp";
+import pmkvyImage from "../assets/images/Verticals/PMKVY.webp";
 import pmkkImage from "../assets/images/Verticals/Pradhan-Mantri-Kaushal-Kendra.webp";
-import nulmImage from "../assets/images/Verticals/NULM – National Urban Livelihoods Mission.webp";
-import manasImage from "../assets/images/Verticals/MANAS – Seekho Aur Kamao.webp";
+import nulmImage from "../assets/images/Verticals/NULM.webp";
+import manasImage from "../assets/images/Verticals/MANAS.webp";
 import stateMissionsImage from "../assets/images/Verticals/State Skill Development Missions (SSDMs) in India Structure, Role, and Opportunities for Stakeholders.webp";
 
 export const SCHEMES_SECTION_DATA = {
