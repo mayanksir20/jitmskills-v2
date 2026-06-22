@@ -18,7 +18,7 @@ const Chatbot = () => {
   const chatEndRef = useRef(null);
 
   // Live JITM node backend execution endpoint mapping
-  const API_URL = "http://https://jitmskills-v2.onrender.com";
+  const API_URL = "https://jitmskills-v2.onrender.com";
 
   useEffect(() => {
     if (isOpen) {
@@ -42,7 +42,7 @@ const Chatbot = () => {
       // =========================================================================
       const response = await axios.post(`${API_URL}/api/chat`, {
         message: currentInput,
-        websiteData: WEBSITE_AI_KNOWLEDGE // 👈 Ye poora object ab backend server ko pass hoga
+        websiteData: WEBSITE_AI_KNOWLEDGE, // 👈 Ye poora object ab backend server ko pass hoga
       });
 
       const aiMessage = { sender: "ai", text: response.data.reply };
