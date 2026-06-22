@@ -1,11 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  Bell,
-  Briefcase,
-  GraduationCap,
-  Building2,
-  Trash2,
-} from "lucide-react";
+import { Megaphone, Briefcase, GraduationCap, Building2 } from "lucide-react";
 import { useState } from "react";
 import axios from "axios";
 
@@ -17,7 +11,7 @@ const NotificationPanel = ({ onClose }) => {
   const loadNotifications = async () => {
     try {
       const { data } = await axios.get(
-        "https://jitmskills-v2.onrender.com/api/notifications"
+        "https://jitmskills-v2.onrender.com/api/notifications",
       );
 
       setItems(data || []);
@@ -36,7 +30,7 @@ const NotificationPanel = ({ onClose }) => {
   const clearAll = async () => {
     try {
       await axios.delete(
-        "https://jitmskills-v2.onrender.com/api/notifications"
+        "https://jitmskills-v2.onrender.com/api/notifications",
       );
 
       setItems([]);
@@ -71,7 +65,7 @@ const NotificationPanel = ({ onClose }) => {
       default:
         return (
           <div className="p-2 rounded-xl bg-slate-100">
-            <Bell size={18} />
+            <Megaphone size={18} />
           </div>
         );
     }
@@ -79,44 +73,40 @@ const NotificationPanel = ({ onClose }) => {
 
   return (
     <div className="absolute right-0 md:right-0 max-md:right-[-120px] top-14 w-[420px] max-md:w-[320px] bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-slate-100 z-[9999] overflow-hidden">
-      
       {/* Header */}
-    <div className="flex items-center justify-between p-5 border-b bg-gradient-to-r from-red-50 to-white">
-  <div>
-    <h3 className="font-bold text-lg text-slate-800">
-      Notifications
-    </h3>
+      <div className="flex items-center justify-between p-5 border-b bg-gradient-to-r from-red-50 to-white">
+        <div>
+          <h3 className="font-bold text-lg text-slate-800">Announcements</h3>
 
-    <p className="text-xs text-slate-500">
-      Latest Updates & Announcements
-    </p>
-  </div>
+          <p className="text-xs text-slate-500">
+            Latest Updates & Announcements
+          </p>
+        </div>
 
-  <div className="flex items-center gap-3">
-    <Bell size={20} className="text-[#D32F2F]" />
+        <div className="flex pb-5 items-center gap-2">
+          <button
+            onClick={clearAll}
+            className="px-3 p-2  text-xs rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition"
+          >
+            Dismiss
+          </button>
 
-    {/* ❌ CLOSE BUTTON */}
-    <button
-      onClick={onClose}
-      className="p-2 rounded-lg text-red-600 hover:bg-red-100 transition"
-    >
-      ✕
-    </button>
-  </div>
-</div>
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg text-red-600 hover:bg-red-100 transition"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
 
       {/* List */}
       <div className="max-h-[420px] overflow-y-auto">
         {items.length === 0 ? (
           <div className="p-10 text-center">
-            <Bell
-              size={40}
-              className="mx-auto text-slate-300 mb-3"
-            />
+            <Megaphone size={40} className="mx-auto text-slate-300 mb-3" />
 
-            <p className="text-slate-500">
-              No notifications available
-            </p>
+            <p className="text-slate-500">No Announcements available</p>
           </div>
         ) : (
           items.map((item) => (
@@ -128,13 +118,11 @@ const NotificationPanel = ({ onClose }) => {
                 {getIcon(item.type)}
 
                 <div className="flex-1">
-                  <h4 className="font-semibold text-slate-800">
+                  <h4 className="font-semibold text-xs text-slate-800">
                     {item.title}
                   </h4>
 
-                  <p className="text-sm text-slate-500 mt-1">
-                    {item.message}
-                  </p>
+                  <p className="text-xs text-slate-500 mb-0">{item.message}</p>
 
                   {item.link && (
                     <Link
@@ -152,7 +140,7 @@ const NotificationPanel = ({ onClose }) => {
       </div>
 
       {/* Footer */}
-      {items.length > 0 && (
+      {/* {items.length > 0 && (
         <div className="p-4 border-t bg-slate-50">
           <button
             onClick={clearAll}
@@ -162,7 +150,7 @@ const NotificationPanel = ({ onClose }) => {
             Clear All Notifications
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

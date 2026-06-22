@@ -18,7 +18,7 @@ const Chatbot = () => {
   const chatEndRef = useRef(null);
 
   // Live JITM node backend execution endpoint mapping
-  const API_URL = "https://jitmskills-v2.onrender.com";
+  const API_URL = "http://https://jitmskills-v2.onrender.com";
 
   useEffect(() => {
     if (isOpen) {

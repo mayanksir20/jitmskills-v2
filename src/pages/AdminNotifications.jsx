@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Trash2, Bell, Plus } from "lucide-react";
+import { Trash2, Plus } from "lucide-react";
 
 const AdminNotifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -17,7 +17,7 @@ const AdminNotifications = () => {
     const loadNotifications = async () => {
       try {
         const { data } = await axios.get(
-          "https://jitmskills-v2.onrender.com/api/notifications"
+          "https://jitmskills-v2.onrender.com/api/notifications",
         );
 
         setNotifications(data);
@@ -33,7 +33,7 @@ const AdminNotifications = () => {
   const fetchNotifications = async () => {
     try {
       const { data } = await axios.get(
-        "https://jitmskills-v2.onrender.com/api/notifications"
+        "https://jitmskills-v2.onrender.com/api/notifications",
       );
 
       setNotifications(data);
@@ -49,7 +49,7 @@ const AdminNotifications = () => {
     try {
       await axios.post(
         "https://jitmskills-v2.onrender.com/api/notifications",
-        formData
+        formData,
       );
 
       Swal.fire({
@@ -75,7 +75,7 @@ const AdminNotifications = () => {
   const deleteNotification = async (id) => {
     try {
       await axios.delete(
-        `https://jitmskills-v2.onrender.com/api/notifications/${id}`
+        `https://jitmskills-v2.onrender.com/api/notifications/${id}`,
       );
 
       fetchNotifications();
@@ -88,7 +88,7 @@ const AdminNotifications = () => {
   const clearAll = async () => {
     try {
       await axios.delete(
-        "https://jitmskills-v2.onrender.com/api/notifications"
+        "https://jitmskills-v2.onrender.com/api/notifications",
       );
 
       fetchNotifications();
@@ -101,11 +101,15 @@ const AdminNotifications = () => {
     <div className="min-h-screen bg-slate-50 pt-52 pb-20 px-4">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <Bell className="text-[#D32F2F]" />
-          <h1 className="text-3xl font-black">
-            Manage Notifications
-          </h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-black">Manage Announcements</h1>
+
+          <button
+            onClick={clearAll}
+            className="bg-red-100 text-red-600 px-3 py-1 rounded-lg text-sm font-medium"
+          >
+            Dismiss
+          </button>
         </div>
 
         {/* Form */}
@@ -164,22 +168,15 @@ const AdminNotifications = () => {
 
         {/* Notification List */}
         <div className="bg-white rounded-2xl shadow overflow-hidden">
-          <div className="flex justify-between items-center p-5 border-b">
+          <div className="p-5 border-b">
             <h2 className="font-bold">
               All Notifications ({notifications.length})
             </h2>
-
-            <button
-              onClick={clearAll}
-              className="bg-red-100 text-red-600 px-4 py-2 rounded-lg"
-            >
-              Clear All
-            </button>
           </div>
 
           {notifications.length === 0 ? (
             <div className="p-8 text-center text-slate-500">
-              No Notifications Found
+              No Announcements Found
             </div>
           ) : (
             notifications.map((item) => (
@@ -190,19 +187,13 @@ const AdminNotifications = () => {
                 <div>
                   <h3 className="font-bold">{item.title}</h3>
 
-                  <p className="text-slate-500 text-sm">
-                    {item.message}
-                  </p>
+                  <p className="text-slate-500 text-sm">{item.message}</p>
 
-                  <p className="text-[#D32F2F] text-xs mt-1">
-                    {item.link}
-                  </p>
+                  <p className="text-[#D32F2F] text-xs mt-1">{item.link}</p>
                 </div>
 
                 <button
-                  onClick={() =>
-                    deleteNotification(item._id)
-                  }
+                  onClick={() => deleteNotification(item._id)}
                   className="text-red-600 hover:text-red-800"
                 >
                   <Trash2 />
