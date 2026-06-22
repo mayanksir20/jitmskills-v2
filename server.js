@@ -15,10 +15,10 @@ const websiteRoutes = require("./routes/websiteRoutes");
 const multer = require("multer");
 
 const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 5 * 1024 * 1024,
-  },
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+    },
 });
 
 // =========================================================================
@@ -34,12 +34,12 @@ const app = express();
 
 // CORS fix for your specific frontend URL
 app.use(cors({
-  origin: [
-    "https://www.jitmskills.com",
-    "https://jitmskills.com",
-    "http://localhost:5173"
-  ],
-  credentials: true
+    origin: [
+        "https://www.jitmskills.com",
+        "https://jitmskills.com",
+        "http://localhost:5173"
+    ],
+    credentials: true
 }));
 
 app.use(express.json({ limit: '10mb' }));
@@ -558,6 +558,8 @@ app.post('/api/chat', async (req, res) => {
     }
 
     try {
+        console.log("CHAT API HIT");
+        console.log("API KEY EXISTS:", !!process.env.GEMINI_API_KEY);
         const prompt = `
 You are the official AI Assistant of JITM Skills Pvt. Ltd.
 
@@ -583,7 +585,7 @@ ${message}
 `;
 
         const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
+            model: "gemini-2.0-flash",
             contents: prompt,
             config: {
                 temperature: 0.3,
@@ -592,13 +594,14 @@ ${message}
         });
 
         res.json({
-            reply: response.text
+            reply: response.text || "No response received"
         });
 
     } catch (error) {
-        console.error('Gemini API Error:', error);
+        console.error("FULL GEMINI ERROR:", error);
+
         res.status(500).json({
-            reply: 'Sorry, I am currently unable to process your request. Please try again later.'
+            reply: error.message || String(error)
         });
     }
 });
