@@ -15,10 +15,10 @@ const websiteRoutes = require("./routes/websiteRoutes");
 const multer = require("multer");
 
 const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 5 * 1024 * 1024,
-  },
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024,
+    },
 });
 
 // =========================================================================
@@ -34,12 +34,12 @@ const app = express();
 
 // CORS fix for your specific frontend URL
 app.use(cors({
-  origin: [
-    "https://www.jitmskills.com",
-    "https://jitmskills.com",
-    "http://localhost:5173"
-  ],
-  credentials: true
+    origin: [
+        "https://www.jitmskills.com",
+        "https://jitmskills.com",
+        "http://localhost:5173"
+    ],
+    credentials: true
 }));
 
 app.use(express.json({ limit: '10mb' }));
@@ -549,7 +549,12 @@ const ai = new GoogleGenAI({
 });
 
 app.post('/api/chat', async (req, res) => {
+    console.log("CHAT API HIT");
+
     const { message, websiteData } = req.body;
+
+    console.log("Message:", message);
+    console.log("API Key Exists:", !!process.env.GEMINI_API_KEY);
 
     if (!message) {
         return res.status(400).json({
@@ -591,14 +596,17 @@ ${message}
             }
         });
 
+        console.log("Gemini Response:", response);
+
         res.json({
-            reply: response.text
+            reply: response.text || "No response received"
         });
 
     } catch (error) {
-        console.error('Gemini API Error:', error);
+        console.error("Gemini API Error:", error);
+
         res.status(500).json({
-            reply: 'Sorry, I am currently unable to process your request. Please try again later.'
+            reply: error.message || "Server Error"
         });
     }
 });
