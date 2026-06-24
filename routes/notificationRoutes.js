@@ -6,11 +6,14 @@ const {
   getNotifications,
   createNotification,
   deleteNotification,
-  dismissNotification,
   clearAllNotifications,
+  dismissNotification,
+  getUserNotifications,
 } = require("../controllers/notificationController");
 
 router.get("/", getNotifications);
+
+router.get("/user", protect, getUserNotifications);
 
 router.post("/", createNotification);
 

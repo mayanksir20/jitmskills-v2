@@ -1,23 +1,45 @@
 const Notification = require("../models/Notification");
 const User = require("../models/User");
 // Get all notifications
+
+
+
+// dismiss Notification
+exports.dismissNotification = async (req, res) => {
+  try {
+    console.log("Notification ID:", req.body.notificationId);
+    console.log("User ID:", req.user._id);
+
+    const { notificationId } = req.body;
+
+    const user = await User.findById(req.user._id);
+
+    if (!user.dismissedNotifications.includes(notificationId)) {
+      user.dismissedNotifications.push(notificationId);
+
+      await user.save();
+    }
+
+    console.log("Updated User:", user);
+
+    res.json({
+      success: true,
+      message: "Notification dismissed",
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+
 exports.getNotifications = async (req, res) => {
   try {
-    let notifications;
-
-    if (req.user) {
-      const user = await User.findById(req.user._id);
-
-      notifications = await Notification.find({
-        _id: {
-          $nin: user.dismissedNotifications,
-        },
-      }).sort({ createdAt: -1 });
-    } else {
-      notifications = await Notification.find().sort({
-        createdAt: -1,
-      });
-    }
+    const notifications = await Notification.find()
+      .sort({ createdAt: -1 });
 
     res.json(notifications);
   } catch (error) {
@@ -61,29 +83,17 @@ exports.deleteNotification = async (req, res) => {
   }
 };
 
-// dismiss Notification
-exports.dismissNotification = async (req, res) => {
+exports.getUserNotifications = async (req, res) => {
   try {
-    const { notificationId } = req.body;
-
     const user = await User.findById(req.user._id);
 
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-      });
-    }
+    const notifications = await Notification.find({
+      _id: {
+        $nin: user.dismissedNotifications,
+      },
+    }).sort({ createdAt: -1 });
 
-    if (!user.dismissedNotifications.includes(notificationId)) {
-      user.dismissedNotifications.push(notificationId);
-
-      await user.save();
-    }
-
-    res.json({
-      success: true,
-      message: "Notification dismissed",
-    });
+    res.json(notifications);
   } catch (error) {
     res.status(500).json({
       message: error.message,

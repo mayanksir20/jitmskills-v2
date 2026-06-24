@@ -7,12 +7,15 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
 
 
-  dismissedNotifications: [
+dismissedNotifications: {
+  type: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Notification",
     },
   ],
+  default: [],
+},
 
   role: {
     type: String,
