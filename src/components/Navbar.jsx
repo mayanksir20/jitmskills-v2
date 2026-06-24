@@ -143,7 +143,9 @@ const Navbar = () => {
   useEffect(() => {
     const fetchNotificationCount = async () => {
       try {
-        const res = await axios.get("https://jitmskills-v2.onrender.com/api/notifications");
+        const res = await axios.get(
+          "https://jitmskills-v2.onrender.com/api/notifications",
+        );
 
         setNotificationCount(res.data?.length || 0);
       } catch (error) {
@@ -180,123 +182,156 @@ const Navbar = () => {
     }, 1200);
   };
 
-const handleContactClick = () => {
+ const handleContactClick = () => {
   Swal.fire({
-    title: `
-      <div style="
-        font-family: 'Inter', sans-serif;
-        font-size: 15px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #D32F2F;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 2px;
-      ">
-        <span>⚡</span> Connect With Us
-      </div>
-    `,
-    html: `
-      <div style="
-        font-family: 'Inter', sans-serif;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 5px;
-      ">
-        
-        <a href="tel:+919971545133" style="
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          text-decoration: none;
-          padding: 10px 14px;
-          border-radius: 12px;
-          background: #FAFAFA;
-          border: 1px solid #E4E4E7;
-          color: #18181B;
-          transition: all 0.2s ease;
-          width: 100%;
-          box-sizing: border-box;
-        " onmouseover="this.style.borderColor='#D32F2F'; this.style.background='#FFF5F5'" onmouseout="this.style.borderColor='#E4E4E7'; this.style.background='#FAFAFA'">
-          <span style="font-size: 18px; background: #FFF5F5; padding: 6px; border-radius: 8px; display: flex; flex-shrink: 0;">📞</span>
-          <div style="text-align: left; line-height: 1.3;">
-            <div style="font-size: 9px; font-weight: 700; color: #71717A; text-transform: uppercase; letter-spacing: 0.02em;">Call Center</div>
-            <div style="font-size: 13px; font-weight: 700; color: #09090B; white-space: nowrap;">+91 9971545133</div>
-          </div>
-        </a>
-
-        <a href="mailto:info@jitmskills.com" style="
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          text-decoration: none;
-          padding: 10px 14px;
-          border-radius: 12px;
-          background: #FAFAFA;
-          border: 1px solid #E4E4E7;
-          color: #18181B;
-          transition: all 0.2s ease;
-          width: 100%;
-          box-sizing: border-box;
-        " onmouseover="this.style.borderColor='#D32F2F'; this.style.background='#FFF5F5'" onmouseout="this.style.borderColor='#E4E4E7'; this.style.background='#FAFAFA'">
-          <span style="font-size: 18px; background: #FFF5F5; padding: 6px; border-radius: 8px; display: flex; flex-shrink: 0;">✉️</span>
-          <div style="text-align: left; line-height: 1.3;">
-            <div style="font-size: 9px; font-weight: 700; color: #71717A; text-transform: uppercase; letter-spacing: 0.02em;">Desk Support</div>
-            <div style="font-size: 13px; font-weight: 700; color: #09090B; white-space: nowrap;">info@jitmskills.com</div>
-          </div>
-        </a>
-
-        <a href="https://maps.google.com/?q=JITM+Skills+Pvt+Ltd+D-87+Sector+2+Noida"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            text-decoration: none;
-            padding: 12px 14px;
-            border-radius: 12px;
-            background: #FAFAFA;
-            border: 1px solid #E4E4E7;
-            color: #18181B;
-            transition: all 0.2s ease;
-            width: 100%;
-            box-sizing: border-box;
-          " onmouseover="this.style.borderColor='#D32F2F'; this.style.background='#FFF5F5'" onmouseout="this.style.borderColor='#E4E4E7'; this.style.background='#FAFAFA'">
-          <span style="font-size: 18px; background: #FFF5F5; padding: 6px; border-radius: 8px; display: flex; flex-shrink: 0; margin-top: 2px;">📍</span>
-          <div style="text-align: left; line-height: 1.3;">
-            <div style="font-size: 9px; font-weight: 700; color: #71717A; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 2px;">Corporate Headquarters</div>
-            <div style="font-size: 12px; font-weight: 800; color: #09090B;">JITM Skills Pvt. Ltd.</div>
-            <div style="font-size: 11px; font-weight: 500; color: #3F3F46; margin-top: 1px;">
-              D-87, Sector 2, Vyapar Marg, Noida, UP - 201301
-            </div>
-          </div>
-        </a>
-
-      </div>
-    `,
+    backdrop: "rgba(15, 23, 42, 0.4)", // Premium semi-transparent blur color
+    width: 460,
     showConfirmButton: false,
     showCloseButton: true,
-    width: 410, // Sized perfectly to keep single-line strings intact
-    padding: "1.25rem",
-    customClass: {
-      popup: "custom-swal-z-index-layer",
-    },
-    didOpen: () => {
-      // High-order layout stacking injection
-      const swalContainer = Swal.getContainer();
-      if (swalContainer) {
-        swalContainer.style.zIndex = "999999";
+    
+    // Yahan z-index ko highest global layer (99999) par force kar rahe hain
+    willOpen: () => {
+      const container = Swal.getContainer();
+      if (container) {
+        container.style.zIndex = "99999";
       }
-    }
+    },
+
+    customClass: {
+      popup: "rounded-[24px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-6",
+      closeButton: "text-slate-400 hover:text-rose-600 text-xl transition-colors duration-200 outline-none focus:outline-none",
+    },
+    html: `
+      <div style="font-family: 'Inter', system-ui, -apple-system, sans-serif; padding: 4px 4px 0 4px;">
+        
+        <div style="text-align: center; margin-bottom: 28px;">
+          <div style="
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 16px auto;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #E11D48, #BE123C);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.4);
+          ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </div>
+
+          <h2 style="
+            font-size: 24px;
+            font-weight: 800;
+            color: #0F172A;
+            letter-spacing: -0.02em;
+            margin: 0 0 6px 0;
+          ">
+            Contact JITM Skills
+          </h2>
+
+          <p style="
+            color: #64748B;
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0;
+          ">
+            Our team is here to assist you with your queries.
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+
+          <a href="tel:+919971545133" class="jitm-contact-card"
+            style="
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              gap: 16px;
+              padding: 18px;
+              border-radius: 18px;
+              background: #F8FAFC;
+              border: 1px solid #E2E8F0;
+              transition: all 0.2s ease-in-out;
+            ">
+            <div style="
+              width: 44px; height: 44px; border-radius: 12px; background: #FFF1F2; 
+              display: flex; align-items: center; justify-content: center; color: #E11D48; flex-shrink: 0;
+            ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </div>
+            <div style="text-align: left; flex-grow: 1;">
+              <div style="font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.05em;">Call Us</div>
+              <div style="font-size: 15px; font-weight: 700; color: #0F172A; margin-top: 2px;">+91 9971545133</div>
+            </div>
+          </a>
+
+          <a href="mailto:info@jitmskills.com" class="jitm-contact-card"
+            style="
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              gap: 16px;
+              padding: 18px;
+              border-radius: 18px;
+              background: #F8FAFC;
+              border: 1px solid #E2E8F0;
+              transition: all 0.2s ease-in-out;
+            ">
+            <div style="
+              width: 44px; height: 44px; border-radius: 12px; background: #F0FDF4; 
+              display: flex; align-items: center; justify-content: center; color: #16A34A; flex-shrink: 0;
+            ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </div>
+            <div style="text-align: left; flex-grow: 1;">
+              <div style="font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.05em;">Email Support</div>
+              <div style="font-size: 15px; font-weight: 700; color: #0F172A; margin-top: 2px;">info@jitmskills.com</div>
+            </div>
+          </a>
+
+          <a href="https://maps.google.com/?q=JITM+Skills+Pvt+Ltd+D-87+Sector+2+Noida" target="_blank" class="jitm-contact-card"
+            style="
+              text-decoration: none;
+              display: flex;
+              align-items: flex-start;
+              gap: 16px;
+              padding: 18px;
+              border-radius: 18px;
+              background: #F8FAFC;
+              border: 1px solid #E2E8F0;
+              transition: all 0.2s ease-in-out;
+            ">
+            <div style="
+              width: 44px; height: 44px; border-radius: 12px; background: #EFF6FF; 
+              display: flex; align-items: center; justify-content: center; color: #2563EB; flex-shrink: 0;
+            ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div style="text-align: left;">
+              <div style="font-size: 11px; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.05em;">Head Office</div>
+              <div style="font-size: 15px; font-weight: 700; color: #0F172A; margin-top: 2px;">JITM Skills Pvt. Ltd.</div>
+              <div style="font-size: 13px; color: #64748B; margin-top: 3px; line-height: 1.4;">D-87, Sector 2, Noida, UP - 201301</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <style>
+        .jitm-contact-card:hover {
+          background: #ffffff !important;
+          border-color: #CBD5E1 !important;
+          transform: translateY(-2px);
+          box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+        }
+      </style>
+    `,
   });
 
   setIsMobileMenuOpen(false);
 };
-
   const isActive = (path) => location.pathname === path;
   const aboutRoutes = aboutDropdownItems.map((item) => item.path);
   const serviceRoutes = servicesDropdownItems.map((item) => item.path);
@@ -319,11 +354,26 @@ const handleContactClick = () => {
             <div className="max-w-7xl mx-auto flex justify-between items-center">
               <div className="flex items-center gap-8">
                 <Link to="/" className="flex items-center gap-2.5 group">
-                  <img src={logoUrl} alt="NSDC" className="h-10" />
+                  <img
+                    loading="lazy"
+                    src={logoUrl}
+                    alt="NSDC"
+                    className="h-10"
+                  />
                 </Link>
                 <div className="flex items-center gap-5 border-l border-slate-200 pl-6 ml-2">
-                  <img src={logoUrl2} alt="Skill India" className="h-12" />
-                  <img src={logoUrl3} alt="NSDC" className="h-12" />
+                  <img
+                    loading="lazy"
+                    src={logoUrl2}
+                    alt="Skill India"
+                    className="h-12"
+                  />
+                  <img
+                    loading="lazy"
+                    src={logoUrl3}
+                    alt="NSDC"
+                    className="h-12"
+                  />
                 </div>
               </div>
 
@@ -393,6 +443,7 @@ const handleContactClick = () => {
           >
             <Link to="/" className="flex items-center shrink-0">
               <img
+                loading="lazy"
                 src={logoUrl}
                 alt="JITM Skills"
                 className="h-10 md:h-11 w-auto min-w-max"
@@ -744,6 +795,7 @@ const handleContactClick = () => {
                       className="flex items-center shrink-0"
                     >
                       <img
+                        loading="lazy"
                         src={logoUrl}
                         alt="JITM Skills"
                         className="h-10 md:h-11 w-auto min-w-max"

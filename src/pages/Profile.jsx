@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { User, Mail, Lock, Save, Camera, ArrowLeft } from "lucide-react";
+import { User, Mail, Lock, Save, Camera, ArrowLeft, Smartphone } from "lucide-react"; // Smartphone icon add kiya
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -19,6 +19,7 @@ const Profile = () => {
       id: savedUser?._id || savedUser?.id || "",
       name: savedUser?.name || "",
       email: savedUser?.email || "",
+      phone: savedUser?.phone || "", // 💡 Phone state add ki
       password: "",
     };
   });
@@ -26,7 +27,6 @@ const Profile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    // Debugging: Check kijiye browser console mein kya dikh raha hai
     console.log("Form Data being sent:", formData);
 
     if (!formData.id || formData.id === "") {
@@ -39,9 +39,19 @@ const Profile = () => {
     }
 
     try {
+      // 💡 LocalStorage se token nikala jisse middleware pass ho sake
+      const savedUser = JSON.parse(localStorage.getItem("user"));
+      const token = savedUser?.token;
+
       const { data } = await axios.put(
         "https://jitmskills-v2.onrender.com/api/auth/profile",
         formData,
+        {
+          // 💡 Bearer Token headers me attach kiya taaki protect middleware block na kare
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       localStorage.setItem("user", JSON.stringify(data));
@@ -56,11 +66,10 @@ const Profile = () => {
 
       window.location.reload();
     } catch (error) {
-      // 500 Error ka asli message yahan dikhega
       console.log("Full Error Response:", error.response?.data);
       Swal.fire({
         icon: "error",
-        title: "Server Error (500)",
+        title: error.response?.status === 401 ? "Session Expired" : "Server Error (500)",
         text:
           error.response?.data?.message ||
           "Something went wrong on the server.",
@@ -102,6 +111,7 @@ const Profile = () => {
           </h2>
           <form onSubmit={handleUpdate} className="space-y-6 mt-8">
             <div className="grid md:grid-cols-2 gap-6">
+              {/* Full Name Field */}
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   Full Name
@@ -121,6 +131,8 @@ const Profile = () => {
                   />
                 </div>
               </div>
+
+              {/* Email Address Field */}
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   Email Address
@@ -133,17 +145,42 @@ const Profile = () => {
                   <input
                     type="email"
                     value={formData.email}
+                    placeholder="Not Provided"
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }
-                    className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl py-4 pl-12 pr-4 text-xs font-bold uppercase focus:outline-none focus:border-[#D32F2F]/20 focus:bg-white transition-all"
+                    className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl py-4 pl-12 pr-4 text-xs font-bold focus:outline-none focus:border-[#D32F2F]/20 focus:bg-white transition-all"
                   />
                 </div>
               </div>
             </div>
+
+            {/* 💡 Added: Phone Number Input Field */}
             <div className="space-y-2">
               <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                New Password
+                Phone Number
+              </label>
+              <div className="relative group">
+                <Smartphone
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-[#D32F2F]"
+                  size={18}
+                />
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  placeholder="Not Provided"
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
+                  className="w-full bg-slate-50 border-2 border-slate-50 rounded-2xl py-4 pl-12 pr-4 text-xs font-bold focus:outline-none focus:border-[#D32F2F]/20 focus:bg-white transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Password Field */}
+            <div className="space-y-2">
+              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                New Password (Leave blank to keep current)
               </label>
               <div className="relative group">
                 <Lock
@@ -160,11 +197,12 @@ const Profile = () => {
                 />
               </div>
             </div>
+
             <motion.button
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full bg-[#1A1A1A] text-white py-5 rounded-2xl font-black text-[10px] uppercase  flex items-center justify-center gap-3 hover:bg-[#D32F2F] transition-all shadow-xl"
+              className="w-full bg-[#1A1A1A] text-white py-5 rounded-2xl font-black text-[10px] uppercase flex items-center justify-center gap-3 hover:bg-[#D32F2F] transition-all shadow-xl"
             >
               <Save size={14} /> Commit Changes
             </motion.button>

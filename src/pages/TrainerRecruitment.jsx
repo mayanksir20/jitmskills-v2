@@ -804,7 +804,7 @@ export default function FacultyOpenings() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent z-10" />
 
                   {/* Main Dynamic Image Placeholder */}
-                  <img
+                  <img loading="lazy"
                     src={TransformingLives}
                     alt="Vocational Training and Skill Development Journey"
                     className="w-full h-full object-cover opacity-85 scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"

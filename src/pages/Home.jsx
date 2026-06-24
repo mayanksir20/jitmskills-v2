@@ -216,11 +216,13 @@ const Home = () => {
                       loop
                       muted
                       playsInline
+                      preload="metadata"
                       className="absolute inset-0 w-full h-full object-cover opacity-60"
                     >
                       <source src={slide.bgVideo} type="video/mp4" />
                     </motion.video>
                     <img
+                      loading="lazy"
                       src={slide.image}
                       className="w-full h-full object-cover mix-blend-screen opacity-90 relative z-10"
                       alt="Hero"
@@ -445,6 +447,7 @@ const Home = () => {
                     className="w-16 h-16 bg-white rounded-2xl p-2 flex items-center justify-center shadow-2xl overflow-hidden"
                   >
                     <img
+                      loading="lazy"
                       src={prog.logoUrl}
                       alt="logo"
                       className="w-full h-full object-contain transition-transform group-hover:scale-110"
@@ -634,6 +637,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-red-600/[0.03] to-transparent opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700" />
 
                   <img
+                    loading="lazy"
                     src={logo.img}
                     alt={logo.alt}
                     className="relative z-10 w-full h-full object-contain filter grayscale opacity-40 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 transition-all duration-1000 scale-90 group-hover/logo:scale-110"
@@ -744,6 +748,7 @@ const Home = () => {
                     whileHover={{ scale: 1 }}
                   >
                     <img
+                      loading="lazy"
                       src={service.img}
                       className="w-full h-full object-cover rounded-[30px] filter grayscale group-hover:grayscale-0 transition-all duration-700"
                       alt={service.title}
@@ -881,6 +886,7 @@ const Home = () => {
                       className="aspect-square bg-slate-900/80 backdrop-blur-md rounded-[2.5rem] p-6 shadow-2xl border border-slate-800/60 flex items-center justify-center group hover:bg-white hover:border-transparent hover:shadow-xl hover:shadow-white/5 transition-all duration-500 cursor-pointer"
                     >
                       <img
+                        loading="lazy"
                         src={logo.img}
                         alt="Certification Logo"
                         className="w-full h-full object-contain filter invert opacity-60 group-hover:invert-0 group-hover:opacity-100 transition-all duration-500"
@@ -978,6 +984,7 @@ const Home = () => {
                     className="group/card h-28 w-full bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center overflow-hidden transition-all duration-500 hover:bg-white hover:shadow-2xl hover:shadow-red-600/5 hover:border-red-600/20"
                   >
                     <img
+                      loading="lazy"
                       src={partner.img}
                       alt="Placement Partner"
                       className="max-h-20 max-w-[70%] object-contain opacity-50 grayscale transition-all duration-700 ease-in-out group-hover/card:opacity-100 group-hover/card:grayscale-0 group-hover/card:scale-125"

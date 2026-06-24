@@ -315,7 +315,7 @@ const NewsEventsHero = () => {
                         className="bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between group shadow-md hover:shadow-xl hover:border-slate-300 transition-all"
                       >
                         <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-200">
-                          <img
+                          <img loading="lazy"
                             src={news.image}
                             alt={news.title[lang]}
                             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-out"
@@ -453,7 +453,7 @@ const NewsEventsHero = () => {
                           className="bg-slate-50 hover:bg-white border border-slate-200 hover:border-[#D32F2F]/30 p-3 rounded-xl flex gap-3 cursor-pointer transition-all duration-300 shadow-xs"
                         >
                           <div className="h-14 w-14 rounded-lg overflow-hidden shrink-0 bg-slate-200">
-                            <img
+                            <img loading="lazy"
                               src={item.image}
                               alt=""
                               className="w-full h-full object-cover"
@@ -612,7 +612,7 @@ const NewsEventsHero = () => {
                   className="bg-white border border-slate-200 w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl relative my-auto text-slate-800"
                 >
                   <div className="relative aspect-[21/9] w-full bg-slate-100">
-                    <img
+                    <img loading="lazy"
                       src={selectedNews.image}
                       alt=""
                       className="w-full h-full object-cover"
@@ -730,7 +730,7 @@ const NewsEventsHero = () => {
                           onClick={() => setLightboxImage(release.image)}
                           className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 cursor-zoom-in group/img border border-slate-150 shadow-inner"
                         >
-                          <img
+                          <img loading="lazy"
                             src={release.image}
                             alt={release.title[lang]}
                             className="w-full h-full transition-transform duration-500 group-hover/img:scale-102"
@@ -905,7 +905,7 @@ const NewsEventsHero = () => {
                 className="relative max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black"
                 onClick={(e) => e.stopPropagation()}
               >
-                <img
+                <img loading="lazy"
                   src={lightboxImage}
                   alt="High Resolution Newspaper Cutting"
                   className="w-full h-full object-contain"

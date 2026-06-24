@@ -502,7 +502,7 @@ export default function DownloadsBrochures() {
               {/* Large Primary Base Image Container */}
               <div className="col-span-7 bg-white p-2 rounded-2xl border border-slate-200 shadow-lg transform hover:-translate-y-1 transition-transform duration-300">
                 <div className="w-full h-64 md:h-80 bg-slate-200 rounded-xl overflow-hidden relative group">
-                  <img
+                  <img loading="lazy"
                     src="/src/assets/images/training-lab-1.jpg" // Replace with real asset path
                     alt="JITM Training Center Infrastructure"
                     className="w-full h-full group-hover:scale-105 transition-transform duration-500"
@@ -518,7 +518,7 @@ export default function DownloadsBrochures() {
               <div className="col-span-5 space-y-4">
                 <div className="bg-white p-2 rounded-2xl border border-slate-200 shadow-md transform hover:translate-y-1 transition-transform duration-300">
                   <div className="w-full h-40 bg-slate-200 rounded-xl overflow-hidden relative group">
-                    <img
+                    <img loading="lazy"
                       src="/src/assets/images/student-classroom.jpg" // Replace with real asset path
                       alt="Verified Student Classroom Batch"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

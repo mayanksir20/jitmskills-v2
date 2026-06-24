@@ -193,7 +193,7 @@ const OurCourse = () => {
                   >
                     {/* Image Layer */}
                     <div className="w-full sm:w-[40%] h-48 sm:h-full overflow-hidden relative border-b sm:border-b-0 sm:border-r border-slate-100">
-                      <img
+                      <img loading="lazy"
                         src={course.image}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         alt={course.title}
@@ -302,7 +302,7 @@ const OurCourse = () => {
                 </button>
 
                 <div className="w-full md:w-2/5 h-48 md:h-auto shrink-0 overflow-hidden relative">
-                  <img
+                  <img loading="lazy"
                     src={selectedCourse.image}
                     className="w-full h-full object-cover"
                     alt=""

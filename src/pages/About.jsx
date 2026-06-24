@@ -872,7 +872,7 @@ const About = () => {
                 >
                   {/* Card Left: Photo with Glow */}
                   <div className="w-full md:w-44 h-52 rounded-[35px] overflow-hidden shrink-0 shadow-2xl relative group-hover:ring-2 ring-red-500/20 transition-all">
-                    <img
+                    <img loading="lazy"
                       src={leader.image}
                       alt={leader.name}
                       className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
@@ -942,7 +942,7 @@ const About = () => {
                     {/* Modal Left: Bio Sidebar */}
                     <div className="lg:w-1/3 bg-gray-50 p-14 flex flex-col items-center text-center border-r border-gray-100">
                       <div className="w-36 h-36 rounded-[40px] overflow-hidden shadow-2xl mb-8 border-4 border-white ring-8 ring-gray-100">
-                        <img
+                        <img loading="lazy"
                           src={selectedLeader.image}
                           className="w-full h-full object-cover"
                           alt=""

@@ -512,7 +512,7 @@ const SuccessStoriesHero = () => {
                     >
                       <div>
                         <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-5 border border-slate-100">
-                          <img
+                          <img loading="lazy"
                             src={alumni.image}
                             alt={alumni.name}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

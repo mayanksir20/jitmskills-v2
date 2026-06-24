@@ -1084,7 +1084,7 @@ export default function StudentRegistrationForm() {
                   <div className="grid grid-cols-12 gap-3 items-center">
                     {/* Photo Space Component Box for Sticky Image Insertion */}
                     <div className="col-span-4 aspect-[3/4] border-2 border-slate-200 bg-slate-50 rounded-lg overflow-hidden relative">
-                      <img
+                      <img loading="lazy"
                         src={generatedICard.photo}
                         alt="Identity Block"
                         className="w-full h-full"

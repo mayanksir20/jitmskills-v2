@@ -145,7 +145,7 @@ export default function InstitutionalAwards({ lang = "en" }) {
                       onClick={() => setLightboxImage(item.image)}
                       className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-900 border border-slate-800/60 cursor-zoom-in group/img shadow-md"
                     >
-                      <img
+                      <img loading="lazy"
                         src={item.image}
                         alt={item.title[lang]}
                         className="w-full h-full transition-transform duration-500 group-hover/img:scale-105"
@@ -232,7 +232,7 @@ export default function InstitutionalAwards({ lang = "en" }) {
               className="relative max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl bg-black flex items-center justify-center border border-slate-800"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
+              <img loading="lazy"
                 src={lightboxImage}
                 alt="Enlarged Certification Resource Spec"
                 className="w-full h-full object-contain max-h-[85vh]"

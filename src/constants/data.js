@@ -11,11 +11,6 @@
 // ];
 
 
-// import videos homepage
-import logisticsVideo from "../assets/video/it-assets.mp4";
-import skillIndiaMissionVideo from "../assets/video/skillIndiaMissionVideo.mp4";
-import skillIndiaMission from "../assets/video/Skill India Mission.mp4";
-import infrastructureWellnessVideo from "../assets/video/infrastructureWellness.mp4";
 
 // Home page Slider data
 export const SLIDE_DATA = [
@@ -32,7 +27,7 @@ export const SLIDE_DATA = [
             "Child Care Ecosystems"
         ],
         // Is video reference variable ko aap upar import karke call kar sakte hain
-        bgVideo: infrastructureWellnessVideo,
+        bgVideo: "https://res.cloudinary.com/db8pze9fz/video/upload/q_auto:good,f_auto/v1782126181/infrastructureWellness_eezlja.mp4",
     },
     {
         id: 2,
@@ -41,7 +36,9 @@ export const SLIDE_DATA = [
         highlight: "All Over India",
         description: "JITM provides end-to-end technology solutions, managing large-scale procurement and deployment of high-performance IT hardware. We ensure seamless logistics and installation support for major corporate giants across the nation.",
         points: ["20+ Leading Companies", "Seamless Logistics", "Pan-India Installation"],
-        bgVideo: logisticsVideo,
+        bgVideo: "https://res.cloudinary.com/db8pze9fz/video/upload/q_auto:good,f_auto/v1782127268/it-assets_mygkqr.mp4",
+
+
     },
     {
         id: 3,
@@ -50,7 +47,7 @@ export const SLIDE_DATA = [
         highlight: "Across India",
         description: "With a massive network of 150+ training centres, we bridge the gap between education and employment. Our 5-star rated NSDC centres have successfully transformed over 10 lakh youth into industry-ready professionals.",
         points: ["150+ Training Centres", "75+ NSDC 5-Star Centres", "10L+ Youth Placed"],
-        bgVideo: skillIndiaMissionVideo,
+        bgVideo: "https://res.cloudinary.com/db8pze9fz/video/upload/q_auto:good,f_auto/v1782127261/skillIndiaMissionVideo_yfvjrf.mp4",
     },
     {
         id: 4,
@@ -59,7 +56,7 @@ export const SLIDE_DATA = [
         highlight: "Ground Level",
         description: "We are at the forefront of national development, executing flagship government schemes like PMKVY and DDU-GKY. Our mission is to empower 2 lakh+ beneficiaries through inclusive and large-scale skill initiatives.",
         points: ["PMKVY | DDU-GKY | NULM", "2L+ Beneficiaries", "Govt. Skill Projects"],
-        bgVideo: skillIndiaMission,
+        bgVideo: "https://res.cloudinary.com/db8pze9fz/video/upload/q_auto:good,f_auto/v1782127261/Skill_India_Mission_vjc3d9.mp4",
     },
 ];
 

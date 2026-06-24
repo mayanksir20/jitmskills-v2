@@ -491,7 +491,7 @@ function BecomeFranchisePartner() {
               >
                 <div className="space-y-4">
                   <div className="relative w-full h-44 rounded-2xl overflow-hidden bg-slate-100">
-                    <img
+                    <img loading="lazy"
                       src={sector.image}
                       alt={sector.title}
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -915,7 +915,7 @@ function BecomeFranchisePartner() {
 
               {/* Core Image Container Frame */}
               <div className="relative w-full aspect-[4/5] rounded-[36px] overflow-hidden border border-white/[0.08] bg-[#030d06] shadow-2xl">
-                <img
+                <img loading="lazy"
                   src={landProperty} // Open development field corporate shot
                   alt="Commercial Land Plot Real Estate Asset"
                   className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"

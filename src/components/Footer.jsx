@@ -60,7 +60,7 @@ const Footer = () => {
               <div className="flex flex-col">
                 <span className="text-xl font-black tracking-tighter text-white leading-none">
                   <Link to="/" className="flex items-center shrink-0">
-                    <img
+                    <img loading="lazy"
                       src={logoUrl}
                       alt="JITM Skills"
                       className="h-10 md:h-11 w-auto min-w-max"
@@ -205,7 +205,7 @@ const Footer = () => {
                   key={img.id}
                   className="aspect-square rounded-lg overflow-hidden bg-slate-900 border border-slate-800/60 relative group cursor-pointer shadow-sm"
                 >
-                  <img
+                  <img loading="lazy"
                     src={img.src}
                     alt={img.alt}
                     className="w-full h-full object-cover filter grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
@@ -337,7 +337,7 @@ const Footer = () => {
         <span className="absolute inset-0 rounded-full bg-[#25D366]/30 animate-ping group-hover:animate-none opacity-75 pointer-events-none scale-90" />
 
         {/* WhatsApp High-Quality PNG Icon */}
-        <img
+        <img loading="lazy"
           src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
           alt="WhatsApp Connect"
           className="w-14 h-14 object-contain relative z-10"

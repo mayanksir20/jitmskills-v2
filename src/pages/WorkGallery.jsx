@@ -305,7 +305,7 @@ const WorkGallery = ({ lang = "en" }) => {
                             onClick={() => setLightboxImage(item.image)}
                             className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-100 border border-slate-200/60 cursor-zoom-in group/img"
                           >
-                            <img
+                            <img loading="lazy"
                               src={item.image}
                               alt={item.category}
                               className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-103"
@@ -477,7 +477,7 @@ const WorkGallery = ({ lang = "en" }) => {
               className="relative max-w-5xl max-h-[85vh] rounded-2xl overflow-hidden shadow-2xl bg-black flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
+              <img loading="lazy"
                 src={lightboxImage}
                 alt="Enlarged Visual Spec Component Document"
                 className="w-full h-full object-contain max-h-[85vh]"

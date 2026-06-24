@@ -509,7 +509,7 @@ const OurCenters = () => {
               className="w-full lg:w-1/2 relative"
             >
               <div className="relative rounded-[3rem] overflow-hidden border-[12px] border-slate-100 aspect-video lg:aspect-square">
-                <img
+                <img loading="lazy"
                   src={trainingImageLab}
                   alt="Training Lab"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -784,7 +784,7 @@ const OurCenters = () => {
                 transition={{ duration: 0.8 }}
                 className="col-span-8 h-full rounded-[2rem] overflow-hidden border-8 border-slate-50 shadow-xl"
               >
-                <img
+                <img loading="lazy"
                   src={classRoomLab}
                   alt="Lab"
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
@@ -799,7 +799,7 @@ const OurCenters = () => {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="h-1/2 rounded-[2rem] overflow-hidden border-8 border-slate-50 shadow-lg"
                 >
-                  <img
+                  <img loading="lazy"
                     src={trainingImage}
                     alt="Training"
                     className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all"
@@ -812,7 +812,7 @@ const OurCenters = () => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="h-1/2 rounded-[2rem] overflow-hidden border-8 border-slate-50 shadow-lg relative bg-[#D32F2F]"
                 >
-                  <img
+                  <img loading="lazy"
                     src={successImage}
                     alt="Success"
                     className="w-full h-full object-cover mix-blend-overlay opacity-50 grayscale hover:grayscale-0 transition-all"

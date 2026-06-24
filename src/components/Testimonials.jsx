@@ -170,7 +170,7 @@ const Testimonials = () => {
                   <div className="flex items-center gap-5 pt-6 border-t border-gray-200/50 relative z-30 bg-inherit">
                     <div className="w-14 h-14 rounded-full overflow-hidden bg-white shadow-lg border-2 border-white ring-2 ring-red-600/10 shrink-0">
                       {t.img ? (
-                        <img
+                        <img loading="lazy"
                           src={t.img}
                           className="w-full h-full object-cover"
                           alt={t.name}
@@ -219,7 +219,7 @@ const Testimonials = () => {
                   <div className="flex items-center gap-6 p-4 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-100">
                     <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden border">
                       {formData.img ? (
-                        <img
+                        <img loading="lazy"
                           src={formData.img}
                           className="w-full h-full object-cover"
                           alt="preview"

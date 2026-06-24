@@ -596,7 +596,7 @@ const CorporateConnectFirstSection = () => {
         >
           <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden shadow-2xl group border border-slate-100">
             {/* 1. Real Training/Placement Image Asset */}
-            <img
+            <img loading="lazy"
               src={CorporateTrainingImage}
               alt="Corporate Recruitment Training at JITM Skills"
               className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out"
