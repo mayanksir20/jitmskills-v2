@@ -1,10 +1,23 @@
 const Notification = require("../models/Notification");
-
+const User = require("../models/User");
 // Get all notifications
 exports.getNotifications = async (req, res) => {
   try {
-    const notifications = await Notification.find()
-      .sort({ createdAt: -1 });
+    let notifications;
+
+    if (req.user) {
+      const user = await User.findById(req.user._id);
+
+      notifications = await Notification.find({
+        _id: {
+          $nin: user.dismissedNotifications,
+        },
+      }).sort({ createdAt: -1 });
+    } else {
+      notifications = await Notification.find().sort({
+        createdAt: -1,
+      });
+    }
 
     res.json(notifications);
   } catch (error) {
@@ -40,6 +53,36 @@ exports.deleteNotification = async (req, res) => {
 
     res.json({
       message: "Notification Deleted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+// dismiss Notification
+exports.dismissNotification = async (req, res) => {
+  try {
+    const { notificationId } = req.body;
+
+    const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+      });
+    }
+
+    if (!user.dismissedNotifications.includes(notificationId)) {
+      user.dismissedNotifications.push(notificationId);
+
+      await user.save();
+    }
+
+    res.json({
+      success: true,
+      message: "Notification dismissed",
     });
   } catch (error) {
     res.status(500).json({
