@@ -49,6 +49,18 @@ const Navbar = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
 
+  useEffect(() => {
+    if (showNotification) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showNotification]);
+
   const sectors = [
     {
       name: "News & Events",
@@ -143,9 +155,25 @@ const Navbar = () => {
   useEffect(() => {
     const fetchNotificationCount = async () => {
       try {
-        const res = await axios.get(
-          "https://jitmskills-v2.onrender.com/api/notifications",
-        );
+        const user = JSON.parse(localStorage.getItem("user"));
+        const token = user?.token;
+
+        let res;
+
+        if (token) {
+          res = await axios.get(
+            "https://jitmskills-v2.onrender.com/api/notifications/user",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
+        } else {
+          res = await axios.get(
+            "https://jitmskills-v2.onrender.com/api/notifications",
+          );
+        }
 
         setNotificationCount(res.data?.length || 0);
       } catch (error) {
@@ -182,26 +210,28 @@ const Navbar = () => {
     }, 1200);
   };
 
- const handleContactClick = () => {
-  Swal.fire({
-    backdrop: "rgba(15, 23, 42, 0.4)", // Premium semi-transparent blur color
-    width: 460,
-    showConfirmButton: false,
-    showCloseButton: true,
-    
-    // Yahan z-index ko highest global layer (99999) par force kar rahe hain
-    willOpen: () => {
-      const container = Swal.getContainer();
-      if (container) {
-        container.style.zIndex = "99999";
-      }
-    },
+  const handleContactClick = () => {
+    Swal.fire({
+      backdrop: "rgba(15, 23, 42, 0.4)", // Premium semi-transparent blur color
+      width: 460,
+      showConfirmButton: false,
+      showCloseButton: true,
 
-    customClass: {
-      popup: "rounded-[24px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-6",
-      closeButton: "text-slate-400 hover:text-rose-600 text-xl transition-colors duration-200 outline-none focus:outline-none",
-    },
-    html: `
+      // Yahan z-index ko highest global layer (99999) par force kar rahe hain
+      willOpen: () => {
+        const container = Swal.getContainer();
+        if (container) {
+          container.style.zIndex = "99999";
+        }
+      },
+
+      customClass: {
+        popup:
+          "rounded-[24px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-6",
+        closeButton:
+          "text-slate-400 hover:text-rose-600 text-xl transition-colors duration-200 outline-none focus:outline-none",
+      },
+      html: `
       <div style="font-family: 'Inter', system-ui, -apple-system, sans-serif; padding: 4px 4px 0 4px;">
         
         <div style="text-align: center; margin-bottom: 28px;">
@@ -328,10 +358,10 @@ const Navbar = () => {
         }
       </style>
     `,
-  });
+    });
 
-  setIsMobileMenuOpen(false);
-};
+    setIsMobileMenuOpen(false);
+  };
   const isActive = (path) => location.pathname === path;
   const aboutRoutes = aboutDropdownItems.map((item) => item.path);
   const serviceRoutes = servicesDropdownItems.map((item) => item.path);
