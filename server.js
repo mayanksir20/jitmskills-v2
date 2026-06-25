@@ -24,7 +24,7 @@ const upload = multer({
 // =========================================================================
 // COMMENT: AI Chatbot ke liye zaroori SDK ko import kiya hai
 // =========================================================================
-const { GoogleGenAI } = require('@google/genai');
+const { GoogleGenAI } = require("@google/genai");
 // end
 dotenv.config();
 connectDB();
@@ -545,34 +545,27 @@ app.post('/api/v1/contact-form', async (req, res) => {
 // 🤖 === START: AI CHATBOT CODE ===
 // =========================================================================
 const ai = new GoogleGenAI({
-    apiKey: process.env.GEMINI_API_KEY
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
-app.post('/api/chat', async (req, res) => {
-    const { message, websiteData } = req.body;
+app.post("/api/chat", async (req, res) => {
+  const { message, websiteData } = req.body;
 
-    if (!message) {
-        return res.status(400).json({
-            error: 'Message field is required'
-        });
-    }
+  if (!message) {
+    return res.status(400).json({
+      error: "Message field is required",
+    });
+  }
 
-    try {
-        console.log("CHAT API HIT");
-        console.log("API KEY EXISTS:", !!process.env.GEMINI_API_KEY);
+  try {
+    console.log("CHAT API HIT");
+    console.log("API KEY EXISTS:", !!process.env.GEMINI_API_KEY);
+    console.log(
+      "KEY START:",
+      process.env.GEMINI_API_KEY?.substring(0, 10)
+    );
 
-        // 🔥 NEW DEBUG LOGS
-        console.log(
-            "KEY START:",
-            process.env.GEMINI_API_KEY?.substring(0, 15)
-        );
-
-        console.log(
-            "KEY LENGTH:",
-            process.env.GEMINI_API_KEY?.length
-        );
-
-        const prompt = `
+    const prompt = `
 You are the official AI Assistant of JITM Skills Pvt. Ltd.
 
 IMPORTANT RULES:
@@ -582,12 +575,7 @@ IMPORTANT RULES:
 - Use WEBSITE DATA as the primary source.
 - If information exists inside WEBSITE DATA, answer from it.
 - If information is not available in WEBSITE DATA, use your general knowledge.
-- If you are not confident about the answer, say:
-"Currently I do not have sufficient information regarding this topic. Please contact the JITM Skills team for accurate assistance."
 - Maintain a professional tone.
-- Do not use markdown formatting.
-- Do not use ** symbols.
-- Do not create fake courses, schemes, services, pages or contact details.
 
 WEBSITE DATA:
 ${JSON.stringify(websiteData)}
@@ -596,29 +584,21 @@ USER QUESTION:
 ${message}
 `;
 
-        const response = await ai.models.generateContent({
-            // 🔥 TEST WITH THIS MODEL FIRST
-            model: "gemini-1.5-flash",
-            contents: prompt,
-            config: {
-                temperature: 0.3,
-                maxOutputTokens: 3000
-            }
-        });
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+    });
 
-        console.log("GEMINI SUCCESS");
+    res.json({
+      reply: response.text || "No response received",
+    });
+  } catch (error) {
+    console.error("FULL GEMINI ERROR:", error);
 
-        res.json({
-            reply: response.text || "No response received"
-        });
-
-    } catch (error) {
-        console.error("FULL GEMINI ERROR:", error);
-
-        res.status(500).json({
-            reply: error.message || String(error)
-        });
-    }
+    res.status(500).json({
+      reply: error.message || String(error),
+    });
+  }
 });
 // =========================================================================
 // 🤖 === END: AI CHATBOT CODE ===
