@@ -10,8 +10,7 @@ const notificationRoutes = require("./routes/notificationRoutes");
 const path = require('path');
 const nodemailer = require('nodemailer'); // <-- 1. Nodemailer import kiya
 const websiteRoutes = require("./routes/websiteRoutes");
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
+import { GoogleGenAI } from "@google/genai";
 
 const multer = require("multer");
 
@@ -545,28 +544,50 @@ app.post('/api/v1/contact-form', async (req, res) => {
 // =========================================================================
 // 🤖 === START: AI CHATBOT CODE ===
 // =========================================================================
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY
+});
 
-app.post("/api/chat", async (req, res) => {
-  const { message, websiteData } = req.body;
+app.post('/api/chat', async (req, res) => {
+    const { message, websiteData } = req.body;
 
-  if (!message) {
-    return res.status(400).json({ error: "Message field is required" });
-  }
+    if (!message) {
+        return res.status(400).json({
+            error: 'Message field is required'
+        });
+    }
 
-  try {
-    console.log("CHAT API HIT");
-    console.log("API KEY EXISTS:", !!process.env.GEMINI_API_KEY);
+    try {
+        console.log("CHAT API HIT");
+        console.log("API KEY EXISTS:", !!process.env.GEMINI_API_KEY);
 
-    const prompt = `
+        // 🔥 NEW DEBUG LOGS
+        console.log(
+            "KEY START:",
+            process.env.GEMINI_API_KEY?.substring(0, 15)
+        );
+
+        console.log(
+            "KEY LENGTH:",
+            process.env.GEMINI_API_KEY?.length
+        );
+
+        const prompt = `
 You are the official AI Assistant of JITM Skills Pvt. Ltd.
 
 IMPORTANT RULES:
 - Always answer in English.
-- Use WEBSITE DATA first.
-- If not available, use general knowledge.
-- If unsure, say you don't have enough information.
-- Do not hallucinate.
+- Never answer in Hindi or Hinglish.
+- Never invent information.
+- Use WEBSITE DATA as the primary source.
+- If information exists inside WEBSITE DATA, answer from it.
+- If information is not available in WEBSITE DATA, use your general knowledge.
+- If you are not confident about the answer, say:
+"Currently I do not have sufficient information regarding this topic. Please contact the JITM Skills team for accurate assistance."
+- Maintain a professional tone.
+- Do not use markdown formatting.
+- Do not use ** symbols.
+- Do not create fake courses, schemes, services, pages or contact details.
 
 WEBSITE DATA:
 ${JSON.stringify(websiteData)}
@@ -575,24 +596,29 @@ USER QUESTION:
 ${message}
 `;
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-    });
+        const response = await ai.models.generateContent({
+            // 🔥 TEST WITH THIS MODEL FIRST
+            model: "gemini-1.5-flash",
+            contents: prompt,
+            config: {
+                temperature: 0.3,
+                maxOutputTokens: 3000
+            }
+        });
 
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+        console.log("GEMINI SUCCESS");
 
-    res.json({
-      reply: text || "No response received",
-    });
-  } catch (error) {
-    console.error("FULL GEMINI ERROR:", error);
+        res.json({
+            reply: response.text || "No response received"
+        });
 
-    res.status(500).json({
-      reply: "AI server error. Please try again later.",
-    });
-  }
+    } catch (error) {
+        console.error("FULL GEMINI ERROR:", error);
+
+        res.status(500).json({
+            reply: error.message || String(error)
+        });
+    }
 });
 // =========================================================================
 // 🤖 === END: AI CHATBOT CODE ===
