@@ -1,19 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { protect } = require("../middleware/authMiddleware");
+const Notification = require("../models/Notification");
+const User = require("../models/User");
+const { protect } = require("../middleware/auth");
 
 const {
   getNotifications,
   createNotification,
   deleteNotification,
   clearAllNotifications,
-  dismissNotification,
-  getUserNotifications,
 } = require("../controllers/notificationController");
 
 router.get("/", getNotifications);
-
-router.get("/user", protect, getUserNotifications);
 
 router.post("/", createNotification);
 
@@ -21,6 +19,59 @@ router.delete("/:id", deleteNotification);
 
 router.delete("/", clearAllNotifications);
 
-router.post("/dismiss", protect, dismissNotification);
+
+router.get("/", async (req, res) => {
+  const notifications = await Notification.find()
+    .sort({ createdAt: -1 });
+
+  res.json(notifications);
+});
+
+
+router.get("/user", protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    const notifications =
+      await Notification.find({
+        _id: {
+          $nin:
+            user.dismissedNotifications,
+        },
+      }).sort({
+        createdAt: -1,
+      });
+
+    res.json(notifications);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+);
+
+router.post("/dismiss", protect, async (req, res) => {
+  try {
+    const { notificationId } =
+      req.body;
+
+    await User.findByIdAndUpdate(req.user._id, {
+      $addToSet: {
+        dismissedNotifications:
+          notificationId,
+      },
+    }
+    );
+
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+);
 
 module.exports = router;

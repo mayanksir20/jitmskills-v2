@@ -6,22 +6,19 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, lowercase: true },
   password: { type: String, required: true },
 
-
-dismissedNotifications: {
-  type: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Notification",
-    },
-  ],
-  default: [],
-},
-
   role: {
     type: String,
     enum: ["admin", "user"],
     default: "user",
   },
+
+
+  dismissedNotifications: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Notification",
+    },
+  ],
 }, { timestamps: true });
 
 // Password hashing before saving (Modern Async Style)
