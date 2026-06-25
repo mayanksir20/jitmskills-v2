@@ -1,12 +1,9 @@
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL;
 
-/**
- * API Central Hub:
- * Vite projects mein environment variables 'VITE_' se shuru hote hain.
- * Agar .env load nahi hoti, toh ye default https://jitmskills-v2.onrender.com use karega.
- */
+
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "https://jitmskills-v2.onrender.com/api";
+    import.meta.env.VITE_API_URL || `${API_URL}`;
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -14,7 +11,7 @@ const api = axios.create({
         'Content-Type': 'application/json',
     },
     // 10 seconds timeout taaki request infinite na phanse
-    timeout: 10000 
+    timeout: 10000
 });
 
 /**

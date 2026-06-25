@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { motion, AnimatePresence } from "framer-motion";
+const API_URL = import.meta.env.VITE_API_URL;
 import {
   User,
   MapPin,
@@ -116,13 +117,10 @@ export default function StudentRegistrationForm() {
         formPayload.append("resume", files.resume);
       }
 
-      const response = await fetch(
-        "https://jitmskills-v2.onrender.com/api/students/register",
-        {
-          method: "POST",
-          body: formPayload,
-        },
-      );
+      const response = await fetch(`${API_URL}/v1/students/register`, {
+        method: "POST",
+        body: formPayload,
+      });
 
       const data = await response.json();
 
@@ -215,18 +213,15 @@ export default function StudentRegistrationForm() {
 
   const exportStudentsExcel = async () => {
     try {
-      const response = await fetch(
-        "https://jitmskills-v2.onrender.com/api/students/export",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            adminCode: exportAdminCode,
-          }),
+      const response = await fetch(`${API_URL}/v1/students/export`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          adminCode: exportAdminCode,
+        }),
+      });
 
       const data = await response.json();
 
@@ -421,7 +416,7 @@ export default function StudentRegistrationForm() {
       <section className="w-full min-h-screen bg-slate-50 text-slate-800 antialiased font-sans pb-16">
         {/* CORE FRAMEWORK CONTAINER (Tightly locked at 90% Width Layout) */}
         <div className="max-w-[90%] mx-auto mt-8">
-          <AnimatePresence >
+          <AnimatePresence>
             {formStatus !== "success" ? (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -1084,7 +1079,8 @@ export default function StudentRegistrationForm() {
                   <div className="grid grid-cols-12 gap-3 items-center">
                     {/* Photo Space Component Box for Sticky Image Insertion */}
                     <div className="col-span-4 aspect-[3/4] border-2 border-slate-200 bg-slate-50 rounded-lg overflow-hidden relative">
-                      <img loading="lazy"
+                      <img
+                        loading="lazy"
                         src={generatedICard.photo}
                         alt="Identity Block"
                         className="w-full h-full"

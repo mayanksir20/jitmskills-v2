@@ -1,9 +1,18 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { User, Mail, Lock, Save, Camera, ArrowLeft, Smartphone } from "lucide-react"; // Smartphone icon add kiya
+import {
+  User,
+  Mail,
+  Lock,
+  Save,
+  Camera,
+  ArrowLeft,
+  Smartphone,
+} from "lucide-react"; // Smartphone icon add kiya
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -43,16 +52,12 @@ const Profile = () => {
       const savedUser = JSON.parse(localStorage.getItem("user"));
       const token = savedUser?.token;
 
-      const { data } = await axios.put(
-        "https://jitmskills-v2.onrender.com/api/auth/profile",
-        formData,
-        {
-          // 💡 Bearer Token headers me attach kiya taaki protect middleware block na kare
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await axios.put(`${API_URL}/auth/profile`, formData, {
+        // 💡 Bearer Token headers me attach kiya taaki protect middleware block na kare
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       localStorage.setItem("user", JSON.stringify(data));
       setUser(data);
@@ -69,7 +74,10 @@ const Profile = () => {
       console.log("Full Error Response:", error.response?.data);
       Swal.fire({
         icon: "error",
-        title: error.response?.status === 401 ? "Session Expired" : "Server Error (500)",
+        title:
+          error.response?.status === 401
+            ? "Session Expired"
+            : "Server Error (500)",
         text:
           error.response?.data?.message ||
           "Something went wrong on the server.",

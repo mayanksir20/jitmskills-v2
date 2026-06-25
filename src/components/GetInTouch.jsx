@@ -10,6 +10,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import Swal from "sweetalert2";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const GetInTouch = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -35,23 +36,20 @@ const GetInTouch = ({ isOpen, onClose }) => {
 
     try {
       // 📍 Alag dedicated endpoint par hit kiya jisse koi field mix na ho
-      const response = await fetch(
-        "https://jitmskills-v2.onrender.com/api/v1/contact-inquiry",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            city: formData.city,
-            state: formData.state,
-            message: formData.message,
-          }),
+      const response = await fetch(`${API_URL}/v1/contact-inquiry`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          city: formData.city,
+          state: formData.state,
+          message: formData.message,
+        }),
+      });
 
       const result = await response.json();
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+const API_URL = import.meta.env.VITE_API_URL;
 import {
   Phone,
   Mail,
@@ -30,21 +31,27 @@ export default function ContactUs() {
     setIsSubmitting(true);
 
     // Front-end Validation Check
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
       setIsSubmitting(false);
       Swal.fire({
         icon: "error",
-        title: '<span style="font-family:sans-serif; font-weight:800; color:#D32F2F;">Transmission Failed</span>',
+        title:
+          '<span style="font-family:sans-serif; font-weight:800; color:#D32F2F;">Transmission Failed</span>',
         text: "Please fill all required fields before dispatching.",
         confirmButtonColor: "#D32F2F",
-        customClass: { popup: "rounded-[24px]" }
+        customClass: { popup: "rounded-[24px]" },
       });
       return;
     }
 
     try {
       // 📍 Node.js Dedicated Corporate Endpoint Matrix
-      const response = await fetch("https://jitmskills-v2.onrender.com/api/v1/corporate-contact", {
+      const response = await fetch(`${API_URL}/v1/corporate-contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +65,8 @@ export default function ContactUs() {
         // --- 7-Second Automatic Auto-Closure Rules integrated cleanly ---
         Swal.fire({
           icon: "success",
-          title: '<span style="font-family:sans-serif; font-weight:800; color:#1A1A1A;">Message Dispatched!</span>',
+          title:
+            '<span style="font-family:sans-serif; font-weight:800; color:#1A1A1A;">Message Dispatched!</span>',
           html: '<p style="font-family:sans-serif; color:#555; font-size:14px;">Your query data has been logged and safely channeled to info@jitmskills.com.</p>',
           confirmButtonColor: "#0F172A",
           timer: 7000,
@@ -81,10 +89,11 @@ export default function ContactUs() {
       console.error("Transmission System Failure:", error);
       Swal.fire({
         icon: "error",
-        title: '<span style="font-family:sans-serif; font-weight:800; color:#D32F2F;">Transmission Error</span>',
+        title:
+          '<span style="font-family:sans-serif; font-weight:800; color:#D32F2F;">Transmission Error</span>',
         text: "Failed to route data through the server layer. Please try again later.",
         confirmButtonColor: "#D32F2F",
-        customClass: { popup: "rounded-[24px]" }
+        customClass: { popup: "rounded-[24px]" },
       });
     } finally {
       setIsSubmitting(false);

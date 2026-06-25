@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { staggerContainer, fadeInUp } from "../utils/animations";
 import landProperty from "../assets/images/Land-property.webp";
-
+const API_URL = import.meta.env.VITE_API_URL;
 import CenterImage1 from "../assets/images/Yoga Training Centers.webp";
 import CenterImage2 from "../assets/images/Diagnostic Labs.webp";
 import CenterImage3 from "../assets/images/Old Age Homes.webp";
@@ -135,16 +135,13 @@ function BecomeFranchisePartner() {
     };
 
     try {
-      const response = await fetch(
-        "https://jitmskills-v2.onrender.com/api/v1/send-lead",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
+      const response = await fetch(`${API_URL}/v1/send-lead`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(payload),
+      });
 
       const data = await response.json();
 
@@ -491,7 +488,8 @@ function BecomeFranchisePartner() {
               >
                 <div className="space-y-4">
                   <div className="relative w-full h-44 rounded-2xl overflow-hidden bg-slate-100">
-                    <img loading="lazy"
+                    <img
+                      loading="lazy"
                       src={sector.image}
                       alt={sector.title}
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -915,7 +913,8 @@ function BecomeFranchisePartner() {
 
               {/* Core Image Container Frame */}
               <div className="relative w-full aspect-[4/5] rounded-[36px] overflow-hidden border border-white/[0.08] bg-[#030d06] shadow-2xl">
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   src={landProperty} // Open development field corporate shot
                   alt="Commercial Land Plot Real Estate Asset"
                   className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"

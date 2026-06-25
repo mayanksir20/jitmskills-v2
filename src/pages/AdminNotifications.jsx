@@ -3,6 +3,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Trash2, Plus } from "lucide-react";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AdminNotifications = () => {
   const [notifications, setNotifications] = useState([]);
 
@@ -16,9 +18,7 @@ const AdminNotifications = () => {
   useEffect(() => {
     const loadNotifications = async () => {
       try {
-        const { data } = await axios.get(
-          "https://jitmskills-v2.onrender.com/api/notifications",
-        );
+        const { data } = await axios.get(`${API_URL}/notifications`);
 
         setNotifications(data);
       } catch (error) {
@@ -32,9 +32,7 @@ const AdminNotifications = () => {
   // Reusable Fetch Function
   const fetchNotifications = async () => {
     try {
-      const { data } = await axios.get(
-        "https://jitmskills-v2.onrender.com/api/notifications",
-      );
+      const { data } = await axios.get(`${API_URL}/notifications`);
 
       setNotifications(data);
     } catch (error) {
@@ -47,10 +45,7 @@ const AdminNotifications = () => {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "https://jitmskills-v2.onrender.com/api/notifications",
-        formData,
-      );
+      await axios.post(`${API_URL}/notifications`, formData);
 
       Swal.fire({
         icon: "success",
@@ -74,9 +69,7 @@ const AdminNotifications = () => {
   // Delete Single
   const deleteNotification = async (id) => {
     try {
-      await axios.delete(
-        `https://jitmskills-v2.onrender.com/api/notifications/${id}`,
-      );
+      await axios.delete(`${API_URL}/notifications/${id}`);
 
       fetchNotifications();
     } catch (error) {
@@ -87,9 +80,7 @@ const AdminNotifications = () => {
   // Clear All
   const clearAll = async () => {
     try {
-      await axios.delete(
-        "https://jitmskills-v2.onrender.com/api/notifications",
-      );
+      await axios.delete(`${API_URL}/notifications`);
 
       fetchNotifications();
     } catch (error) {

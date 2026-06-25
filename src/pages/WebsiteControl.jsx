@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const WebsiteControl = () => {
   const [loading, setLoading] = useState(false);
@@ -8,18 +9,11 @@ const WebsiteControl = () => {
     try {
       setLoading(true);
 
-      await axios.post(
-        "https://jitmskills-v2.onrender.com/api/website-status",
-        {
-          maintenanceMode: status,
-        }
-      );
+      await axios.post(`${API_URL}/website-status`, {
+        maintenanceMode: status,
+      });
 
-      alert(
-        status
-          ? "Maintenance Enabled"
-          : "Maintenance Disabled"
-      );
+      alert(status ? "Maintenance Enabled" : "Maintenance Disabled");
     } catch (error) {
       console.log(error);
       alert("Something went wrong");
@@ -30,9 +24,7 @@ const WebsiteControl = () => {
 
   return (
     <div className="p-10 pt-52">
-      <h1 className="text-3xl font-bold mb-8">
-        Website Control Panel
-      </h1>
+      <h1 className="text-3xl font-bold mb-8">Website Control Panel</h1>
 
       <div className="flex gap-4">
         <button

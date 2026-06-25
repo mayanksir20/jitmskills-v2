@@ -39,6 +39,7 @@ import {
 } from "../utils/animations";
 import JitmLogo from "../assets/images/jitm skills logo-old.png";
 import LearnersTrained from "../assets/images/Learners Trained.webp";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function InternshipHero() {
   // Modal State for Certificate Preview
@@ -92,13 +93,10 @@ export default function InternshipHero() {
         dataPayload.append("document", formData.document);
       }
 
-      const response = await fetch(
-        "https://jitmskills-v2.onrender.com/api/v1/internship-apply",
-        {
-          method: "POST",
-          body: dataPayload, // No explicit Content-Type header to let browser set boundary parameters automatically
-        },
-      );
+      const response = await fetch(`${API_URL}/v1/internship-apply`, {
+        method: "POST",
+        body: dataPayload, // No explicit Content-Type header to let browser set boundary parameters automatically
+      });
 
       const result = await response.json();
 
@@ -615,7 +613,8 @@ export default function InternshipHero() {
 
                     {/* 1. ACTUAL LOGO AS WATERMARK IN BACKGROUND CENTERED */}
                     <div className="absolute inset-0 opacity-[0.04] flex flex-col items-center justify-center pointer-events-none select-none">
-                      <img loading="lazy"
+                      <img
+                        loading="lazy"
                         src={JitmLogo}
                         alt="JITM Skills Watermark"
                         className="w-1/3 object-contain mb-1"
@@ -632,7 +631,8 @@ export default function InternshipHero() {
                     <div className="text-center relative z-10 space-y-1">
                       <div className="flex items-center justify-center gap-2">
                         {/* 2. REAL PNG LOGO ASSET IMPLEMENTATION */}
-                        <img loading="lazy"
+                        <img
+                          loading="lazy"
                           src={JitmLogo}
                           alt="JITM Skills Logo"
                           className="h-5 sm:h-7 object-contain"
@@ -875,7 +875,8 @@ export default function InternshipHero() {
                 <div className="absolute inset-0 bg-[#D32F2F]/10 mix-blend-color opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
                 {/* Core Image Element Asset */}
-                <img loading="lazy"
+                <img
+                  loading="lazy"
                   src={LearnersTrained}
                   alt="Shaping a Skilled Nation"
                   className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"

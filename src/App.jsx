@@ -9,6 +9,7 @@ import axios from "axios";
 import { GraduationCap } from "lucide-react";
 import logoUrl from "./assets/images/jitm skills logo-old.webp";
 
+const API_URL = import.meta.env.VITE_API_URL;
 // Components
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -79,9 +80,7 @@ function App() {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const res = await axios.get(
-          "https://jitmskills-v2.onrender.com/api/website-status",
-        );
+        const res = await axios.get(`${API_URL}/website-status`);
 
         setMaintenance(res.data.maintenanceMode);
       } catch (err) {

@@ -4,6 +4,7 @@ import NotificationBell from "../components/NotificationBell";
 import NotificationPanel from "../components/NotificationPanel";
 import UserMenu from "../components/UserMenu";
 import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 import {
   Menu,
   X,
@@ -48,18 +49,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
-
-  useEffect(() => {
-    if (showNotification) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [showNotification]);
 
   const sectors = [
     {
@@ -161,27 +150,29 @@ const Navbar = () => {
         let res;
 
         if (token) {
-          res = await axios.get(
-            "https://jitmskills-v2.onrender.com/api/notifications/user",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
+          res = await axios.get(`${API_URL}/notifications/user`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
             },
-          );
+          });
         } else {
-          res = await axios.get(
-            "https://jitmskills-v2.onrender.com/api/notifications",
-          );
+          res = await axios.get(`${API_URL}/notifications`);
         }
 
         setNotificationCount(res.data?.length || 0);
       } catch (error) {
-        console.log(error);
+        console.log("Notification Count Error:", error);
       }
     };
 
     fetchNotificationCount();
+
+    // Har 10 second me refresh
+    const interval = setInterval(() => {
+      fetchNotificationCount();
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -425,6 +416,7 @@ const Navbar = () => {
                       >
                         <NotificationPanel
                           onClose={() => setShowNotification(false)}
+                          setNotificationCount={setNotificationCount}
                         />
                       </motion.div>
                     )}

@@ -9,7 +9,9 @@ import {
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const NotificationPanel = ({ onClose }) => {
+const API_URL = import.meta.env.VITE_API_URL;
+
+const NotificationPanel = ({ onClose, setNotificationCount }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,20 +24,15 @@ const NotificationPanel = ({ onClose }) => {
         let response;
 
         if (token) {
-          response = await axios.get(
-            "https://jitmskills-v2.onrender.com/api/notifications/user",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
+          response = await axios.get(`${API_URL}/notifications/user`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
             },
-          );
+          });
 
           console.log("USER NOTIFICATIONS:", response.data);
         } else {
-          response = await axios.get(
-            "https://jitmskills-v2.onrender.com/api/notifications",
-          );
+          response = await axios.get(`${API_URL}/notifications`);
 
           console.log("GUEST NOTIFICATIONS:", response.data);
         }
@@ -57,7 +54,7 @@ const NotificationPanel = ({ onClose }) => {
   const dismissNotification = async (notificationId) => {
     try {
       await axios.post(
-        "https://jitmskills-v2.onrender.com/api/notifications/dismiss",
+        `${API_URL}/notifications/dismiss`,
         {
           notificationId,
         },
@@ -68,7 +65,14 @@ const NotificationPanel = ({ onClose }) => {
         },
       );
 
-      setItems((prev) => prev.filter((item) => item._id !== notificationId));
+      setItems((prev) => {
+        const updatedItems = prev.filter((item) => item._id !== notificationId);
+
+        // Badge count instantly update
+        setNotificationCount(updatedItems.length);
+
+        return updatedItems;
+      });
     } catch (error) {
       console.log(error);
     }
@@ -120,9 +124,7 @@ const NotificationPanel = ({ onClose }) => {
 
         <div className="flex pb-5 items-center gap-2">
           {token && (
-            <span className="text-xs text-green-600 font-medium">
-              Logged In
-            </span>
+            <span className="text-xs text-green-600 font-medium"></span>
           )}
 
           <button

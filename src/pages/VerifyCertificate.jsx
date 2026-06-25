@@ -12,6 +12,7 @@ import {
   User,
   IdCard,
 } from "lucide-react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function CertificateHeroSection() {
   const [rollNumber, setRollNumber] = useState("");
@@ -27,9 +28,7 @@ export default function CertificateHeroSection() {
     setStudent(null);
 
     try {
-      const response = await fetch(
-        `https://jitmskills-v2.onrender.com/api/students/verify/${rollNumber}`,
-      );
+      const response = await fetch(`${API_URL}/students/verify/${rollNumber}`);
 
       const data = await response.json();
 

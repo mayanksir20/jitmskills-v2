@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
+const API_URL = import.meta.env.VITE_API_URL;
 import {
   Send,
   Loader2,
@@ -84,7 +85,7 @@ const EnrollmentForm = ({
 
     try {
       // 📍 Dedicated Enrollment Endpoint Hit Matrix
-      const response = await fetch("https://jitmskills-v2.onrender.com/api/v1/student-enrollment", {
+      const response = await fetch(`${API_URL}/v1/student-enrollment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payloadData),
@@ -95,7 +96,8 @@ const EnrollmentForm = ({
       if (response.ok && result.status === "success") {
         // --- 7-Second Automatic Auto-Closure Rules integrated ---
         Swal.fire({
-          title: '<span style="font-family:sans-serif; font-weight:800; color:#1A1A1A;">Application Sent!</span>',
+          title:
+            '<span style="font-family:sans-serif; font-weight:800; color:#1A1A1A;">Application Sent!</span>',
           html: '<p style="font-family:sans-serif; color:#555; font-size:14px;">Thank you for applying. Your enrollment telemetry details have been sent to info@jitmskills.com.</p>',
           icon: "success",
           confirmButtonColor: "#0F172A",
@@ -113,7 +115,8 @@ const EnrollmentForm = ({
     } catch (error) {
       console.error("Enrollment Matrix Streaming Error:", error);
       Swal.fire({
-        title: '<span style="font-family:sans-serif; font-weight:800; color:#D32F2F;">Error!</span>',
+        title:
+          '<span style="font-family:sans-serif; font-weight:800; color:#D32F2F;">Error!</span>',
         text: "Something went wrong while communicating with the server layer.",
         icon: "error",
         confirmButtonColor: "#D32F2F",
@@ -249,7 +252,13 @@ const EnrollmentForm = ({
                     ))}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
-                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
               </div>
             </div>
           </div>

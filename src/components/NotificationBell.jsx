@@ -9,7 +9,7 @@ const NotificationBell = ({ onClick, unread }) => {
       <Megaphone size={18} />
 
       {unread > 0 && (
-        <span className="notification-badge absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full text-white text-[10px] font-bold flex items-center justify-center shadow-lg">
+        <span className="absolute -top-2.5 -right-2.5 min-w-[22px] h-[22px] px-1 rounded-full bg-[#D32F2F] text-white text-[11px] font-bold flex items-center justify-center shadow-lg border-2 border-white animate-pulse">
           {unread > 99 ? "99+" : unread}
         </span>
       )}
