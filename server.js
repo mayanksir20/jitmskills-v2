@@ -10,7 +10,7 @@ const notificationRoutes = require("./routes/notificationRoutes");
 const path = require('path');
 const nodemailer = require('nodemailer'); // <-- 1. Nodemailer import kiya
 const websiteRoutes = require("./routes/websiteRoutes");
-import { GoogleGenAI } from "@google/genai";
+const { GoogleGenAI } = require("@google/genai");
 
 const multer = require("multer");
 
@@ -24,7 +24,6 @@ const upload = multer({
 // =========================================================================
 // COMMENT: AI Chatbot ke liye zaroori SDK ko import kiya hai
 // =========================================================================
-const { GoogleGenAI } = require("@google/genai");
 // end
 dotenv.config();
 connectDB();
@@ -545,27 +544,25 @@ app.post('/api/v1/contact-form', async (req, res) => {
 // 🤖 === START: AI CHATBOT CODE ===
 // =========================================================================
 const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
+    apiKey: process.env.GEMINI_API_KEY,
 });
 
 app.post("/api/chat", async (req, res) => {
-  const { message, websiteData } = req.body;
+    const { message, websiteData } = req.body;
 
-  if (!message) {
-    return res.status(400).json({
-      error: "Message field is required",
-    });
-  }
+    if (!message) {
+        return res.status(400).json({
+            error: "Message field is required",
+        });
+    }
 
-  try {
-    console.log("CHAT API HIT");
-    console.log("API KEY EXISTS:", !!process.env.GEMINI_API_KEY);
-    console.log(
-      "KEY START:",
-      process.env.GEMINI_API_KEY?.substring(0, 10)
-    );
+    try {
+        console.log("CHAT API HIT");
+        console.log("API KEY EXISTS:", !!process.env.GEMINI_API_KEY);
+        console.log("KEY START:", process.env.GEMINI_API_KEY?.substring(0, 10));
+        console.log("KEY LENGTH:", process.env.GEMINI_API_KEY?.length);
 
-    const prompt = `
+        const prompt = `
 You are the official AI Assistant of JITM Skills Pvt. Ltd.
 
 IMPORTANT RULES:
@@ -584,21 +581,21 @@ USER QUESTION:
 ${message}
 `;
 
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-    });
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: prompt,
+        });
 
-    res.json({
-      reply: response.text || "No response received",
-    });
-  } catch (error) {
-    console.error("FULL GEMINI ERROR:", error);
+        res.json({
+            reply: response.text || "No response received",
+        });
+    } catch (error) {
+        console.error("FULL GEMINI ERROR:", error);
 
-    res.status(500).json({
-      reply: error.message || String(error),
-    });
-  }
+        res.status(500).json({
+            reply: error.message || String(error),
+        });
+    }
 });
 // =========================================================================
 // 🤖 === END: AI CHATBOT CODE ===
