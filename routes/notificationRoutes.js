@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Notification = require("../models/Notification");
 const User = require("../models/User");
-const { protect } = require("../middleware/auth");
+const { protect } = require("../middleware/authMiddleware");
 
 const {
   getNotifications,
@@ -30,25 +30,36 @@ router.get("/", async (req, res) => {
 
 router.get("/user", protect, async (req, res) => {
   try {
+    console.log("USER:", req.user);
+
     const user = await User.findById(req.user._id);
-    const notifications =
-      await Notification.find({
-        _id: {
-          $nin:
-            user.dismissedNotifications,
-        },
-      }).sort({
-        createdAt: -1,
-      });
+
+    console.log(
+      "DISMISSED:",
+      user.dismissedNotifications
+    );
+
+    const notifications = await Notification.find({
+      _id: {
+        $nin: user.dismissedNotifications || [],
+      },
+    }).sort({ createdAt: -1 });
+
+    console.log(
+      "FOUND:",
+      notifications.length
+    );
 
     res.json(notifications);
   } catch (error) {
+    console.log("ERROR:", error);
+
     res.status(500).json({
       message: error.message,
     });
   }
-}
-);
+});
+
 
 router.post("/dismiss", protect, async (req, res) => {
   try {
