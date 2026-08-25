@@ -397,7 +397,7 @@ app.post('/api/v1/internship-apply', upload.single('document'), async (req, res)
 // Student Enrollment, Contact Inquiry,
 
 app.post(
-    "/api/students/register",
+    "/api/v1/students/register",
     upload.fields([
         { name: "passportPhoto", maxCount: 1 },
         { name: "aadhaarCard", maxCount: 1 },
