@@ -443,56 +443,68 @@ app.post(
                 subject: `New Student Registration - ${fullName}`,
 
                 html: `
-          <h2>New Student Registration</h2>
+                    <h2>New Student Registration</h2>
 
-          <p><b>Name:</b> ${fullName}</p>
-          <p><b>Father:</b> ${fatherName}</p>
-          <p><b>Mother:</b> ${motherName}</p>
-          <p><b>DOB:</b> ${dob}</p>
-          <p><b>Gender:</b> ${gender}</p>
-          <p><b>Category:</b> ${category}</p>
-          <p><b>Aadhaar:</b> ${aadhaarNum}</p>
-          <p><b>Mobile:</b> ${mobile}</p>
-          <p><b>Alt Mobile:</b> ${altMobile}</p>
-          <p><b>Email:</b> ${email}</p>
-          <p><b>Address:</b> ${address}</p>
-          <p><b>State:</b> ${state}</p>
-          <p><b>District:</b> ${district}</p>
-          <p><b>Pin Code:</b> ${pinCode}</p>
-          <p><b>Qualification:</b> ${qualification}</p>
-          <p><b>Board:</b> ${board}</p>
-          <p><b>Passing Year:</b> ${passingYear}</p>
-          <p><b>Percentage:</b> ${percentage}</p>
-          <p><b>Course:</b> ${courseName === "Others"
-                        ? customCourse
-                        : courseName
-                    }</p>
-          <p><b>Sector Trade:</b> ${sectorTrade}</p>
-          <p><b>Batch Preference:</b> ${batchPreference}</p>
-          <p><b>Training Location:</b> ${trainingLocation}</p>
-          <p><b>Mode:</b> ${mode}</p>
-        `,
+                    <p><b>Name:</b> ${fullName}</p>
+                    <p><b>Father:</b> ${fatherName}</p>
+                    <p><b>Mother:</b> ${motherName}</p>
+                    <p><b>DOB:</b> ${dob}</p>
+                    <p><b>Gender:</b> ${gender}</p>
+                    <p><b>Category:</b> ${category}</p>
+                    <p><b>Aadhaar:</b> ${aadhaarNum}</p>
+                    <p><b>Mobile:</b> ${mobile}</p>
+                    <p><b>Alt Mobile:</b> ${altMobile}</p>
+                    <p><b>Email:</b> ${email}</p>
+                    <p><b>Address:</b> ${address}</p>
+                    <p><b>State:</b> ${state}</p>
+                    <p><b>District:</b> ${district}</p>
+                    <p><b>Pin Code:</b> ${pinCode}</p>
+                    <p><b>Qualification:</b> ${qualification}</p>
+                    <p><b>Board:</b> ${board}</p>
+                    <p><b>Passing Year:</b> ${passingYear}</p>
+                    <p><b>Percentage:</b> ${percentage}</p>
+
+                    <p>
+                        <b>Course:</b>
+                        ${
+                            courseName === "Others"
+                                ? customCourse
+                                : courseName
+                        }
+                    </p>
+
+                    <p><b>Sector Trade:</b> ${sectorTrade}</p>
+                    <p><b>Batch Preference:</b> ${batchPreference}</p>
+                    <p><b>Training Location:</b> ${trainingLocation}</p>
+                    <p><b>Mode:</b> ${mode}</p>
+                `,
 
                 attachments: [
                     ...(passportPhoto
-                        ? [{
-                            filename: passportPhoto.originalname,
-                            content: passportPhoto.buffer,
-                        }]
+                        ? [
+                            {
+                                filename: passportPhoto.originalname,
+                                content: passportPhoto.buffer,
+                            },
+                        ]
                         : []),
 
                     ...(aadhaarCard
-                        ? [{
-                            filename: aadhaarCard.originalname,
-                            content: aadhaarCard.buffer,
-                        }]
+                        ? [
+                            {
+                                filename: aadhaarCard.originalname,
+                                content: aadhaarCard.buffer,
+                            },
+                        ]
                         : []),
 
                     ...(resume
-                        ? [{
-                            filename: resume.originalname,
-                            content: resume.buffer,
-                        }]
+                        ? [
+                            {
+                                filename: resume.originalname,
+                                content: resume.buffer,
+                            },
+                        ]
                         : []),
                 ],
             });
@@ -501,17 +513,27 @@ app.post(
                 success: true,
                 message: "Registration Submitted Successfully",
             });
+
         } catch (error) {
-            console.error("Student Registration Error:", error);
+
+            console.error("=================================");
+            console.error("STUDENT REGISTRATION ERROR");
+            console.error("Message:", error.message);
+            console.error("Name:", error.name);
+            console.error("Code:", error.code);
+            console.error("Command:", error.command);
+            console.error("Response:", error.response);
+            console.error("Stack:", error.stack);
+            console.error("=================================");
 
             res.status(500).json({
                 success: false,
                 message: error.message,
+                errorCode: error.code || null,
             });
         }
     }
 );
-
 // end
 
 // =========================================================================
