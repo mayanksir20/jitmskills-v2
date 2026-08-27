@@ -61,12 +61,25 @@ app.get('/api/test', (req, res) => {
 // =========================================================================
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    secure: true, // true because port is 465
+    port: Number(process.env.SMTP_PORT) || 465,
+    secure: Number(process.env.SMTP_PORT) === 465,
+
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
+
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000,
+});
+
+transporter.verify((error, success) => {
+    if (error) {
+        console.error("❌ SMTP CONNECTION ERROR:", error);
+    } else {
+        console.log("✅ SMTP SERVER READY");
+    }
 });
 // =========================================================================
 // ✉️ === END: EMAIL SMTP TRANSPORTER CONFIGURATION ===
@@ -397,13 +410,13 @@ app.post('/api/v1/internship-apply', upload.single('document'), async (req, res)
 // Student Enrollment, Contact Inquiry,
 
 app.post("/api/v1/students/register", upload.fields([
-        { name: "passportPhoto", maxCount: 1 },
-        { name: "aadhaarCard", maxCount: 1 },
-        { name: "resume", maxCount: 1 },
-    ]),
+    { name: "passportPhoto", maxCount: 1 },
+    { name: "aadhaarCard", maxCount: 1 },
+    { name: "resume", maxCount: 1 },
+]),
     async (req, res) => {
 
-         console.log("🔥🔥 STUDENT REGISTER ROUTE HIT");
+        console.log("🔥🔥 STUDENT REGISTER ROUTE HIT");
 
         try {
             const {
